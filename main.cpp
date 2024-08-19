@@ -6,16 +6,18 @@
 #include "./headers/ray.hpp"
 
 color ray_color(const ray& r) {
-    return color(0, 0, 0);
+    vec3 unit_direction = unit_vector(r.direction());
+    auto a = 0.5*(unit_direction.y() + 1.0);
+    return (1.0-a)*color(1.0, 1.0, 1.0) + a*color(0.5, 0.7, 1.0);
 }
 
 int main () {
     
     //defining image dimensions
-    int img_width, img_height;
-    float aspect_ratio = 16.0f/9.0f;
+    float img_width, img_height;
+    float aspect_ratio = 16.0/9.0;
 
-    img_width = 200;
+    img_width = 400.0;
     img_height = aspect_ratio * img_width;
 
     //image creation
@@ -24,13 +26,13 @@ int main () {
     //image headers
     file_ptr << 
         "P3\n" << 
-        img_height << " " << img_width << "\n" <<
+        int(img_height) << " " << int(img_width) << "\n" <<
         255 << "\n";
 
     //camera stuff
-    auto viewport_height = 2.0f;
-    auto viewport_width = viewport_height * double(img_width / img_height);
-    auto focal_length = 1.0f;
+    auto viewport_height = 2.0;
+    auto viewport_width = viewport_height * (double(img_width) / img_height);
+    auto focal_length = 1.0;
     auto camera_center = point3(0, 0, 0);
 
     //viewport vectors
@@ -41,10 +43,20 @@ int main () {
     auto pixel_delta_u = viewport_u / img_width;
     auto pixel_delta_v = viewport_v / img_height;
 
+    //edge
+    auto viewport_upper_left = camera_center
+                             - vec3(0, 0, focal_length) - viewport_u/2 - viewport_v/2;
+    auto pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
+
     //writer loop
     for (int i = 0; i < img_height; i++) {
         for (int j = 0; j < img_width; j++) {
-            write_color(file_ptr, color(i, j, 0));
+            auto pixel_center = pixel00_loc + (j * pixel_delta_u) + (i * pixel_delta_v);
+            auto ray_direction = pixel_center - camera_center;
+
+            ray r(camera_center, ray_direction);
+            color pixel_color = ray_color(r);
+            write_color(file_ptr, pixel_color);
         }
     }
 
