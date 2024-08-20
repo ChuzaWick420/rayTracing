@@ -1,14 +1,20 @@
-#include <iostream>
 #include <fstream>
 
-#include "./headers/vec3.hpp"
-#include "./headers/color3.hpp"
-#include "./headers/ray.hpp"
+#include "./headers/main_header.hpp"
+#include "./headers/hittable.hpp"
+#include "./headers/hittable_list.hpp"
+#include "./headers/sphere.hpp"
 
-color ray_color(const ray& r) {
+color ray_color(const ray& r, const hittable& world) {
+    hit_record rec;
+
+    if (world.hit(r, 0, infinity, rec)) {
+        return 0.5 * (rec.normal + color(1,1,1));
+    }
+
     vec3 unit_direction = unit_vector(r.direction());
     auto a = 0.5*(unit_direction.y() + 1.0);
-    return (1.0-a)*color(1.0, 1.0, 1.0) + a*color(0.5, 0.7, 1.0);
+    return (1.0-a)*color(1.0, 1.0, 1.0) + a*color(0.0, 0.0, 0.0);
 }
 
 int main () {
@@ -18,7 +24,10 @@ int main () {
     float aspect_ratio = 16.0/9.0;
 
     img_width = 400.0;
-    img_height = aspect_ratio * img_width;
+    img_height = img_width / aspect_ratio;
+
+    //height correction
+    img_height = (img_height < 1) ? 1 : img_height;
 
     //image creation
     std::ofstream file_ptr("image.ppm");
@@ -26,8 +35,14 @@ int main () {
     //image headers
     file_ptr << 
         "P3\n" << 
-        int(img_height) << " " << int(img_width) << "\n" <<
+        int(img_width) << " " << int(img_height) << "\n" <<
         255 << "\n";
+
+    // World
+    hittable_list world;
+
+    world.add(make_shared<sphere>(point3(0,0,-1), 0.5));
+    world.add(make_shared<sphere>(point3(0,-100.5,-1), 100));
 
     //camera stuff
     auto viewport_height = 2.0;
@@ -55,7 +70,7 @@ int main () {
             auto ray_direction = pixel_center - camera_center;
 
             ray r(camera_center, ray_direction);
-            color pixel_color = ray_color(r);
+            color pixel_color = ray_color(r, world);
             write_color(file_ptr, pixel_color);
         }
     }
