@@ -1,5 +1,6 @@
 body {
 	background-color: rgb(46, 48, 53);
+	font-family: "Open sans", sans-serif;
 	margin-inline: 20vw;
 }
 
@@ -9,4 +10,10 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
 	color: white;
+}
+
+code {
+	background-color: rgb(30, 30, 30);
+	border: 1px gray solid;
+	border-radius: 5px;
 }
