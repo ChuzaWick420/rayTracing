@@ -1,0 +1,76 @@
+.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #1e1e1e; /* Default background for VS Code */
+    color: #d4d4d4; /* Default text color */
+}
+
+.hljs-keyword {
+    color: rgb(86, 156, 214); /* Keywords */
+}
+
+.hljs-operator,
+.hljs-punctuation {
+    color: rgb(212, 212, 212); /* Operators and punctuation */
+}
+
+.hljs-string,
+.hljs-meta .hljs-string {
+    color: rgb(214, 157, 133); /* Strings */
+}
+
+.hljs-number,
+.hljs-literal {
+    color: rgb(181, 206, 168); /* Numbers */
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-doctag {
+    color: rgb(87, 166, 74); /* Comments */
+}
+
+.hljs-type,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-class .hljs-title,
+.hljs-attr {
+    color: rgb(78, 201, 176); /* Types and Class Names */
+}
+
+.hljs-function .hljs-title,
+.hljs-title.function_ {
+    color: rgb(220, 220, 170); /* Function names */
+}
+
+.hljs-attr {
+    color: rgb(156, 220, 254); /* Identifiers */
+}
+
+.hljs-preprocessor,
+.hljs-meta,
+.hljs-link {
+    color: rgb(155, 155, 155); /* Preprocessor directives */
+}
+
+/* Optional: To make the code more visually appealing, you can add these styles */
+.hljs-title,
+.hljs-section,
+.hljs-name {
+    font-weight: bold;
+}
+
+.hljs-emphasis {
+    font-style: italic;
+}
+
+.hljs-strong {
+    font-weight: bold;
+}
+
+.hljs-link {
+    text-decoration: underline;
+    color: #569cd6;
+}
+
