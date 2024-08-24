@@ -7,9 +7,10 @@
 class camera {
     public:
 
-        double aspect_ratio = 1.0;  //default aspect ratio is a square
-        int img_width = 100;        //default image width is 100 pixels
-        int samples_per_pixel = 10; //count for random samples per pixel
+        double aspect_ratio      = 1.0;     // default aspect ratio is a square
+        int    img_width         = 100;     // default image width is 100 pixels
+        int    samples_per_pixel = 10;      // count for random samples per pixel
+        int    max_depth         = 10;      // max depth for recursion
 
         void render(const hittable& world) {
             initialize();
@@ -21,7 +22,7 @@ class camera {
 
                     for (int sample = 0; sample < samples_per_pixel; sample++) {
                         ray r = get_ray(j, i);
-                        pixel_color += ray_color(r, world);
+                        pixel_color += ray_color(r, max_depth, world);
                     }
 
                     write_color(file_ptr, pixel_color * pixel_samples_scale);
@@ -79,11 +80,15 @@ class camera {
                 pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
         }
 
-        color ray_color(const ray& r, const hittable& world) const {
+        color ray_color(const ray& r, int depth, const hittable& world) const {
+            if (depth <= 0)
+                return color(0, 0, 0);
+
             hit_record rec;
 
-            if (world.hit(r, interval(0, infinity), rec)) {
-                return 0.5 * (rec.normal + color(1,1,1));
+            if (world.hit(r, interval(0.001, infinity), rec)) {
+                vec3 direction = random_on_hemisphere(rec.normal);
+                return 0.5 * ray_color(ray(rec.p, direction), depth - 1, world);
             }
 
             vec3 unit_direction = unit_vector(r.direction());
