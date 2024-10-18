@@ -1,0 +1,26 @@
+#ifndef HITTABLE_HPP
+#define HITTABLE_HPP
+
+#include "../vec3/vec3.hpp"
+#include "../ray/ray.hpp"
+#include "../interval/interval.hpp"
+
+class hit_record {
+    public:
+        point3 p;
+        vec3 normal;
+        double t;
+        bool front_face;
+
+        void set_face_normal(const ray&, const vec3&);
+
+};
+
+class hittable {
+    public:
+        virtual ~hittable() = default;
+
+        virtual bool hit(const ray&, interval, hit_record&) const = 0;
+};
+
+#endif
