@@ -15,5 +15,6 @@ void write_color(sf::Color* pixel, const color& pixel_color) {
     pixel->r = int(256 * intensity.clamp(r));
     pixel->g = int(256 * intensity.clamp(g));
     pixel->b = int(256 * intensity.clamp(b));
+    pixel->a = 255;
 
 }

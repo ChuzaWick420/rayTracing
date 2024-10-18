@@ -23,7 +23,7 @@ class camera {
     private:
 
         sf::Color** pixel_grid = nullptr;
-        int window_height = 700;
+        int window_height = 650;
         int img_height;               // Rendered image height
         point3 center;                   // Camera center
         point3 pixel00_loc;              // Location of pixel 0, 0

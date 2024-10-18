@@ -1,4 +1,5 @@
 #include "./camera.hpp"
+#include <cstdint>
 
 void camera::show() {
 
@@ -7,8 +8,23 @@ void camera::show() {
     // Window to render image on
     sf::RenderWindow window(sf::VideoMode(window_width, window_height), "Ray Tracing", sf::Style::Default);
 
-    float scalar = window_width / img_width;
+    float scalar = float(window_width) / img_width;
 
+    //creates an image
+    sf::Image i_image;
+    i_image.create(img_width, img_height);
+
+    for(int i = 0; i < img_height; i++) {
+        for (int j = 0; j < img_width; j++) {
+            i_image.setPixel(j, i, pixel_grid[i][j]);
+        }
+    }
+    
+    sf::Texture t_image;
+    t_image.loadFromImage(i_image);
+
+    sf::Sprite s_image(t_image);
+    s_image.setScale(sf::Vector2f(scalar, scalar));
 
     while (window.isOpen()){
         sf::Event event;
@@ -18,19 +34,9 @@ void camera::show() {
                 window.close();
         }
 
+        window.clear(sf::Color::Green);
 
-        window.clear();
-
-        for(int i = 0; i < img_height; i++) {
-            for (int j = 0; j < img_width; j++) {
-                sf::RectangleShape cell(sf::Vector2f(scalar, scalar));
-
-                cell.setFillColor(pixel_grid[i][j]);
-                cell.setPosition(j * scalar, i * scalar);
-
-                window.draw(cell);
-            }
-        }
+        window.draw(s_image);
 
         window.display();
     }
@@ -49,9 +55,8 @@ void camera::render(const hittable& world) {
                 pixel_color += ray_color(r, max_depth, world);
             }
 
-//            std::cout << "height: " << i << ", " << "width: " << j << std::endl;
             write_color(&pixel_grid[i][j], pixel_color * pixel_samples_scale);
-            }
+        }
     }
 
    this->show();
