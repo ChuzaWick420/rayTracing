@@ -1,10 +1,14 @@
 #include "./camera.hpp"
-#include "SFML/Graphics.hpp"
 
 void camera::show() {
 
+    int window_width = aspect_ratio * window_height;
+
     // Window to render image on
     sf::RenderWindow window(sf::VideoMode(window_width, window_height), "Ray Tracing", sf::Style::Default);
+
+    float scalar = window_width / img_width;
+
 
     while (window.isOpen()){
         sf::Event event;
@@ -14,8 +18,20 @@ void camera::show() {
                 window.close();
         }
 
+
         window.clear();
-        /*window.draw(sf::Color(60, 0, 200));*/
+
+        for(int i = 0; i < img_height; i++) {
+            for (int j = 0; j < img_width; j++) {
+                sf::RectangleShape cell(sf::Vector2f(scalar, scalar));
+
+                cell.setFillColor(pixel_grid[i][j]);
+                cell.setPosition(j * scalar, i * scalar);
+
+                window.draw(cell);
+            }
+        }
+
         window.display();
     }
 }
@@ -33,7 +49,7 @@ void camera::render(const hittable& world) {
                 pixel_color += ray_color(r, max_depth, world);
             }
 
-            //write_color(file_ptr, pixel_color * pixel_samples_scale);
+            write_color(pixel_grid[i][j], pixel_color * pixel_samples_scale);
             }
     }
 
@@ -48,11 +64,11 @@ void camera::initialize() {
 
     pixel_samples_scale = 1.0 / samples_per_pixel;
 
-            //write image headers
-            //file_ptr << 
-             //   "P3\n" << 
-              //  int(img_width) << " " << int(img_height) << "\n" <<
-               // 255 << "\n";
+    pixel_grid = new sf::Color*[img_height];
+    
+    for (int i = 0; i < img_width; i++) {
+        *pixel_grid = new sf::Color[img_width];
+    }
 
     center = point3(0, 0, 0);
 
@@ -115,3 +131,11 @@ color camera::ray_color(const ray& r, int depth, const hittable& world) const {
     return (1.0-a)*color(1.0, 1.0, 1.0) + a*color(0.5, 0.7, 1.0);
 }
 
+
+//close delete img data before camera destroys
+camera::~camera() {
+    int img_height = img_width / aspect_ratio;
+    for (int j = 0; j < img_height; j++) {
+        delete [] pixel_grid[j];
+    }
+}

@@ -3,6 +3,9 @@
 
 #include "../hittable/hittable.hpp"
 #include "../color3/color3.hpp"
+
+#include "SFML/Graphics.hpp"
+
 #include "../main_header.hpp"
 
 class camera {
@@ -15,22 +18,18 @@ class camera {
 
         void render(const hittable&);
 
-        //close the file before camera destroys
-        ~camera() {
-            //file_ptr.close();
-        }
+        ~camera();
 
     private:
 
+        sf::Color** pixel_grid = nullptr;
         int window_height = 700;
-        int window_width = aspect_ratio * window_height;
         int img_height;               // Rendered image height
         point3 center;                   // Camera center
         point3 pixel00_loc;              // Location of pixel 0, 0
         vec3 pixel_delta_u;            // Offset to pixel to the right
         vec3 pixel_delta_v;            // Offset to pixel below
         double pixel_samples_scale;      // Color scale factor for a sum of pixel samples
-
 
         void show();
 
