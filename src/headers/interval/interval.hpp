@@ -1,6 +1,8 @@
 #ifndef INTERVAL_HPP
 #define INTERVAL_HPP
 
+#include "../main_header.hpp"
+
 class interval {
   public:
     double min, max;

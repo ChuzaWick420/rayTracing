@@ -15,7 +15,7 @@ void camera::show() {
         }
 
         window.clear();
-        window.draw(sf::Color(60, 0, 200));
+        /*window.draw(sf::Color(60, 0, 200));*/
         window.display();
     }
 }

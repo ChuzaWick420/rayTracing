@@ -2,6 +2,11 @@
 #define HITTABLE_LIST_HPP
 
 #include "../hittable/hittable.hpp"
+#include "../ray/ray.hpp"
+#include "../interval/interval.hpp"
+
+#include "../main_header.hpp"
+
 #include <vector>
 
 class hittable_list : public hittable {
@@ -15,7 +20,7 @@ class hittable_list : public hittable {
 
         void add(shared_ptr<hittable>);
 
-        bool hit(const ray&, interval, hit_record&) const override{
+        bool hit(const ray& r, interval ray_t, hit_record& rec) const override{
 
             hit_record temp_rec;
             bool hit_anything = false;

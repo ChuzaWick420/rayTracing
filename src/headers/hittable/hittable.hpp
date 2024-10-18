@@ -1,9 +1,9 @@
 #ifndef HITTABLE_HPP
 #define HITTABLE_HPP
 
+#include "../interval/interval.hpp"
 #include "../vec3/vec3.hpp"
 #include "../ray/ray.hpp"
-#include "../interval/interval.hpp"
 
 class hit_record {
     public:

@@ -1,9 +1,9 @@
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
 
-#include "hittable.hpp"
-#include "../vec3/vec3.hpp"
+#include "../hittable/hittable.hpp"
 #include "../color3/color3.hpp"
+#include "../main_header.hpp"
 
 class camera {
     public:
@@ -13,7 +13,7 @@ class camera {
         int    samples_per_pixel = 10;      // count for random samples per pixel
         int    max_depth         = 10;      // max depth for recursion
 
-
+        void render(const hittable&);
 
         //close the file before camera destroys
         ~camera() {
@@ -33,7 +33,6 @@ class camera {
 
 
         void show();
-        void render(const hittable&);
 
         void initialize();
 
@@ -42,6 +41,7 @@ class camera {
         ray get_ray(int, int) const;
 
         color ray_color(const ray&, int, const hittable&) const;
+        vec3 sample_square() const;
 };
 
 #endif

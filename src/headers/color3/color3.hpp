@@ -2,7 +2,7 @@
 #define COLOR_HPP
 
 #include "../vec3/vec3.hpp"
-#include "interval.hpp"
+#include "../interval/interval.hpp"
 
 using color = vec3;
 
@@ -20,7 +20,7 @@ void write_color(std::ofstream& out, const color& pixel_color) {
     int bbyte = int(256 * intensity.clamp(b));
 
     // Write out the pixel color components.
-    out << rbyte << ' ' << gbyte << ' ' << bbyte << '\n';
+    /*out << rbyte << ' ' << gbyte << ' ' << bbyte << '\n';*/
 }
 
 #endif

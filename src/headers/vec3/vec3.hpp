@@ -1,6 +1,9 @@
 #ifndef VEC3_HPP
 #define VEC3_HPP
 
+#include "../main_header.hpp"
+#include "SFML/Graphics.hpp"
+
 class vec3 {
   public:
     double e[3];
@@ -26,6 +29,13 @@ class vec3 {
 
     double length_squared() const;
 
+    static vec3 random() {
+        return vec3(random_double(), random_double(), random_double());
+    }
+
+    static vec3 random(double min, double max) {
+        return vec3(random_double(min,max), random_double(min,max), random_double(min,max));
+    }
 };
 
 // point3 is just an alias for vec3, but useful for geometric clarity in the code.
@@ -100,12 +110,5 @@ inline vec3 random_on_hemisphere(const vec3& normal) {
         return -on_unit_sphere;
 }
 
-static vec3 random() {
-    return vec3(random_double(), random_double(), random_double());
-}
-
-static vec3 random(double min, double max) {
-    return vec3(random_double(min,max), random_double(min,max), random_double(min,max));
-}
 
 #endif

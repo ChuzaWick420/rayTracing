@@ -1,13 +1,12 @@
-#include <fstream>
+#include "./headers/vec3/vec3.hpp"
+#include "./headers/sphere/sphere.hpp"
+#include "./headers/hittable_list/hittable_list.hpp"
+#include "./headers/camera/camera.hpp"
 
 #include "./headers/main_header.hpp"
-#include "./headers/hittable.hpp"
-#include "./headers/hittable_list.hpp"
-#include "./headers/sphere.hpp"
-#include "./headers/camera.hpp"
 
 int main () {
-    
+
     // World
     hittable_list world;
 
