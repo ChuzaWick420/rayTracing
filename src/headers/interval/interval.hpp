@@ -9,25 +9,13 @@ class interval {
 
     interval(double min, double max) : min(min), max(max) {}
 
-    double size() const {
-        return max - min;
-    }
+    double size() const;
 
-    bool contains(double x) const {
-        return min <= x && x <= max;
-    }
+    bool contains(double) const;
 
-    bool surrounds(double x) const {
-        return min < x && x < max;
-    }
+    bool surrounds(double) const;
 
-    double clamp(double x) const {
-        if (x < min)
-            return min;
-        if (x > max)
-            return max;
-        return x;
-    }
+    double clamp(double x) const;
 
     static const interval empty, universe;
 };
