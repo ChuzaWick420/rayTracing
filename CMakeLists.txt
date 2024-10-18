@@ -13,9 +13,9 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(main src/main.cpp)
-target_link_libraries(main PRIVATE sfml-graphics)
-target_compile_features(main PRIVATE cxx_std_17)
+add_executable(main.exe src/main.cpp)
+target_link_libraries(main.exe PRIVATE sfml-graphics)
+target_compile_features(main.exe PRIVATE cxx_std_17)
 
 if(WIN32)
     add_custom_command(
