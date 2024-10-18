@@ -3,7 +3,7 @@
 
 #include "SFML/Graphics.hpp"
 
-void write_color(sf::Color& pixel, const color& pixel_color) {
+void write_color(sf::Color* pixel, const color& pixel_color) {
     auto r = pixel_color.x();
     auto g = pixel_color.y();
     auto b = pixel_color.z();
@@ -12,8 +12,8 @@ void write_color(sf::Color& pixel, const color& pixel_color) {
 
     static const interval intensity(0.000, 0.999);
 
-    pixel.r = int(256 * intensity.clamp(r));
-    pixel.g = int(256 * intensity.clamp(g));
-    pixel.b = int(256 * intensity.clamp(b));
+    pixel->r = int(256 * intensity.clamp(r));
+    pixel->g = int(256 * intensity.clamp(g));
+    pixel->b = int(256 * intensity.clamp(b));
 
 }

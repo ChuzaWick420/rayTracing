@@ -5,6 +5,6 @@
 
 using color = vec3;
 
-void write_color(sf::Color&, const color&);
+void write_color(sf::Color*, const color&);
 
 #endif

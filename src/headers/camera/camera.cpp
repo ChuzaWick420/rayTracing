@@ -49,7 +49,8 @@ void camera::render(const hittable& world) {
                 pixel_color += ray_color(r, max_depth, world);
             }
 
-            write_color(pixel_grid[i][j], pixel_color * pixel_samples_scale);
+//            std::cout << "height: " << i << ", " << "width: " << j << std::endl;
+            write_color(&pixel_grid[i][j], pixel_color * pixel_samples_scale);
             }
     }
 
@@ -65,12 +66,10 @@ void camera::initialize() {
     pixel_samples_scale = 1.0 / samples_per_pixel;
 
     pixel_grid = new sf::Color*[img_height];
-    
+ 
     for (int i = 0; i < img_width; i++) {
-        *pixel_grid = new sf::Color[img_width];
+        pixel_grid[i] = new sf::Color[img_width];
     }
-
-    center = point3(0, 0, 0);
 
     // Determine viewport dimensions.
     auto focal_length = 1.0;
