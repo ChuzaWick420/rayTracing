@@ -3,8 +3,7 @@
 
 #include "hittable.hpp"
 #include "../vec3/vec3.hpp"
-#include "camera.hpp"
-#include <SFML/Graphics.hpp>
+#include "../color3/color3.hpp"
 
 class camera {
     public:

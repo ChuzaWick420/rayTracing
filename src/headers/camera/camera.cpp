@@ -1,4 +1,4 @@
-#include "camera.hpp"
+#include "./camera.hpp"
 #include "SFML/Graphics.hpp"
 
 void camera::show() {
