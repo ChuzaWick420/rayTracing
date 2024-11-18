@@ -5,12 +5,16 @@
 #include "../vec3/vec3.hpp"
 #include "../ray/ray.hpp"
 
+class material;
+
 class hit_record {
     public:
         point3 p;
         vec3 normal;
         double t;
         bool front_face;
+
+        shared_ptr<material> mat;
 
         void set_face_normal(const ray&, const vec3&);
 

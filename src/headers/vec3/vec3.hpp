@@ -29,6 +29,8 @@ class vec3 {
 
     double length_squared() const;
 
+    bool near_zero() const;
+
     static vec3 random() {
         return vec3(random_double(), random_double(), random_double());
     }
@@ -110,5 +112,11 @@ inline vec3 random_on_hemisphere(const vec3& normal) {
         return -on_unit_sphere;
 }
 
+inline vec3 reflect(const vec3& v, const vec3& n) {
+    double d_mag = dot(v, unit_vector(n));
+    vec3 d = unit_vector(n) * d_mag;
+    vec3 b = -d;
+    return v + 2 * b;
+}
 
 #endif

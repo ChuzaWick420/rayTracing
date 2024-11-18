@@ -62,4 +62,7 @@ double vec3::length() const {
 double vec3::length_squared() const {
     return e[0]*e[0] + e[1]*e[1] + e[2]*e[2];
 }
-
+bool vec3::near_zero() const {
+    auto threshold = 1e-8;
+    return (std::fabs(e[0]) < threshold) && (std::fabs(e[1]) < threshold) && (std::fabs(e[2]) < threshold);
+}
