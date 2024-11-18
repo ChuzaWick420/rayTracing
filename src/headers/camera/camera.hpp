@@ -7,6 +7,7 @@
 #include "SFML/Graphics.hpp"
 
 #include "../main_header.hpp"
+#include <vector>
 
 class camera {
     public:
@@ -22,7 +23,7 @@ class camera {
 
     private:
 
-        sf::Color** pixel_grid = nullptr;
+        std::vector<sf::Color> pixel_grid;
         int window_width = 1024;
         int img_height;               // Rendered image height
         point3 center;                   // Camera center

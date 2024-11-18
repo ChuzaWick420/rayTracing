@@ -14,12 +14,16 @@ void camera::show_img() {
     sf::Image i_image;
     i_image.create(img_width, img_height);
 
-    for(int i = 0; i < img_height; i++) {
-        for (int j = 0; j < img_width; j++) {
-            i_image.setPixel(j, i, pixel_grid[i][j]);
-        }
+    int index = 1;
+
+    for (auto pixel : pixel_grid) {
+        int x = (index - 1) % img_width;
+        int y = (index - 1) / img_width;
+        i_image.setPixel(x, y, pixel);
+
+        index++;
     }
-    
+
     sf::Texture t_image;
     t_image.loadFromImage(i_image);
 
@@ -44,19 +48,25 @@ void camera::show_img() {
 
 void camera::render(const hittable& world) {
     initialize();
-        
-    //writer loop
-    for (int i = 0; i < img_height; i++) {
-        for (int j = 0; j < img_width; j++) {
-            color pixel_color(0, 0, 0);
 
-            for (int sample = 0; sample < samples_per_pixel; sample++) {
-                ray r = get_ray(j, i);
-                pixel_color += ray_color(r, max_depth, world);
-            }
+    pixel_grid.resize(img_height * img_width);
 
-            write_color(&pixel_grid[i][j], pixel_color * pixel_samples_scale);
+    int index = 1;
+
+    for (auto& pixel : pixel_grid) {
+        color pixel_color(0, 0, 0);
+
+        int x = (index - 1) % img_width;
+        int y = (index - 1) / img_width;
+
+        for (int sample = 0; sample < samples_per_pixel; sample++) {
+            ray r = get_ray(x, y);
+            pixel_color += ray_color(r, max_depth, world);
         }
+
+        write_color(&pixel, pixel_color * pixel_samples_scale);
+
+        index++;
     }
 
    this->show_img();
@@ -69,12 +79,6 @@ void camera::initialize() {
     img_height = (img_height < 1) ? 1 : img_height;
 
     pixel_samples_scale = 1.0 / samples_per_pixel;
-
-    pixel_grid = new sf::Color*[img_height];
- 
-    for (int i = 0; i < img_width; i++) {
-        pixel_grid[i] = new sf::Color[img_width];
-    }
 
     // Determine viewport dimensions.
     auto focal_length = 1.0;
@@ -134,11 +138,4 @@ color camera::ray_color(const ray& r, int depth, const hittable& world) const {
     return (1.0-a)*color(1.0, 1.0, 1.0) + a*color(0.5, 0.7, 1.0);
 }
 
-
-//close delete img data before camera destroys
-camera::~camera() {
-    int img_height = img_width / aspect_ratio;
-    for (int j = 0; j < img_height; j++) {
-        delete [] pixel_grid[j];
-    }
-}
+camera::~camera() {}
