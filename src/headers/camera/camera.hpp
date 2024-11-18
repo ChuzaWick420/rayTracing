@@ -23,7 +23,7 @@ class camera {
     private:
 
         sf::Color** pixel_grid = nullptr;
-        int window_height = 650;
+        int window_width = 1024;
         int img_height;               // Rendered image height
         point3 center;                   // Camera center
         point3 pixel00_loc;              // Location of pixel 0, 0
@@ -31,7 +31,7 @@ class camera {
         vec3 pixel_delta_v;            // Offset to pixel below
         double pixel_samples_scale;      // Color scale factor for a sum of pixel samples
 
-        void show();
+        void show_img();
 
         void initialize();
 

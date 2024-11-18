@@ -1,9 +1,9 @@
 #include "./camera.hpp"
 #include <cstdint>
 
-void camera::show() {
+void camera::show_img() {
 
-    int window_width = aspect_ratio * window_height;
+    int window_height = window_width / aspect_ratio;
 
     // Window to render image on
     sf::RenderWindow window(sf::VideoMode(window_width, window_height), "Ray Tracing", sf::Style::Default);
@@ -59,7 +59,7 @@ void camera::render(const hittable& world) {
         }
     }
 
-   this->show();
+   this->show_img();
 }
 
 void camera::initialize() {
@@ -90,9 +90,8 @@ void camera::initialize() {
     pixel_delta_v = viewport_v / img_height;
 
     // Calculate the location of the upper left pixel.
-    auto viewport_upper_left =
-        center - vec3(0, 0, focal_length) - viewport_u/2 - viewport_v/2;
-        pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
+    auto viewport_upper_left = - vec3(0, 0, focal_length) - viewport_u/2 - viewport_v/2;
+    pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
 }
 
 

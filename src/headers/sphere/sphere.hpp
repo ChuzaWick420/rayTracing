@@ -24,9 +24,9 @@ class sphere : public hittable {
     
         // Find the nearest root that lies in the acceptable range.
         auto root = (h - sqrtd) / a;
-        if (root <= ray_t.min || ray_t.max <= root) {
-        root = (h + sqrtd) / a;
-            if (root <= ray_t.min || ray_t.max <= root)
+        if (!ray_t.surrounds(root)){
+            root = (h + sqrtd) / a;
+            if (!ray_t.surrounds(root)){
                 return false;
         }
     
@@ -34,7 +34,7 @@ class sphere : public hittable {
         rec.p = r.at(rec.t);
         rec.normal = (rec.p - center) / radius;
     
-        vec3 outward_normal = (rec.p - center) / radius;
+        vec3 outward_normal = rec.normal;
         rec.set_face_normal(r, outward_normal);
     
         return true;
