@@ -18,6 +18,9 @@ class camera {
         int    max_depth         = 10;      // max depth for recursion
         bool   img_gen           = false;   // saves a png when true
         double vfov              = 90;      // vertical viewing angle
+        point3 lookfrom          = point3(0, 0, 0);
+        point3 lookat            = point3(0, 0, -1);
+        vec3   vup               = vec3(0, 1, 0);
 
         void render(const hittable&);
 
@@ -33,11 +36,11 @@ class camera {
         vec3 pixel_delta_u;            // Offset to pixel to the right
         vec3 pixel_delta_v;            // Offset to pixel below
         double pixel_samples_scale;      // Color scale factor for a sum of pixel samples
+        vec3 u, v, w;
 
         void show_img();
 
         void initialize();
-
 
         vec3 sample_square();
         ray get_ray(int, int) const;
