@@ -5,6 +5,7 @@
 #include "./headers/material/material.hpp"
 #include "./headers/lambertian/lambertian.hpp"
 #include "./headers/metal/metal.hpp"
+#include "./headers/dielectric/dielectric.hpp"
 
 #include "./headers/main_header.hpp"
 
@@ -15,8 +16,8 @@ int main () {
 
     auto material_ground = make_shared<lambertian>(color(0.8, 0.8, 0.0));
     auto material_center = make_shared<lambertian>(color(0.1, 0.2, 0.5));
-    auto material_left   = make_shared<metal>(color(0.8, 0.8, 0.8), 0.3);
-    auto material_right  = make_shared<metal>(color(0.8, 0.6, 0.2), 0.7);
+    auto material_left   = make_shared<metal>(color(0.8, 0.8, 0.8), 0.08);
+    auto material_right  = make_shared<dielectric>(1.50);
 
     world.add(make_shared<sphere>(point3( 0.0, -100.5, -1.0), 100.0, material_ground));
     world.add(make_shared<sphere>(point3( 0.0,    0.0, -1.2),   0.5, material_center));
@@ -29,7 +30,7 @@ int main () {
     cam.img_width = 1024;
     cam.samples_per_pixel = 100;
     cam.max_depth = 50;
-    cam.img_gen = true;
+    cam.img_gen = false;
 
     cam.render(world);
 
