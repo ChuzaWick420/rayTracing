@@ -16,6 +16,7 @@ class camera {
         int    img_width         = 100;     // default image width is 100 pixels
         int    samples_per_pixel = 10;      // count for random samples per pixel
         int    max_depth         = 10;      // max depth for recursion
+        bool   img_gen           = false;   // saves a png when true
 
         void render(const hittable&);
 

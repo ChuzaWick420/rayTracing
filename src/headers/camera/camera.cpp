@@ -32,6 +32,10 @@ void camera::show_img() {
     sf::Sprite s_image(t_image);
     s_image.setScale(sf::Vector2f(scalar, scalar));
 
+    // optionally save the image
+    if (this->img_gen == true)
+        i_image.saveToFile("rendered_img.png");
+
     while (window.isOpen()){
         sf::Event event;
 
