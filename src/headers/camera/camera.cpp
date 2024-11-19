@@ -1,6 +1,7 @@
 #include "./camera.hpp"
 #include "../material/material.hpp"
 
+#include <cmath>
 #include <cstdint>
 
 void camera::show_img() {
@@ -79,8 +80,6 @@ void camera::render(const hittable& world) {
 }
 
 void camera::initialize() {
-    //file_ptr.open("image.ppm");
-
     img_height = int(img_width / aspect_ratio);
     img_height = (img_height < 1) ? 1 : img_height;
 
@@ -88,7 +87,9 @@ void camera::initialize() {
 
     // Determine viewport dimensions.
     auto focal_length = 1.0;
-    auto viewport_height = 2.0;
+    auto theta = degrees_to_radians(vfov);
+    auto h = std::tan(theta / 2);
+    auto viewport_height = 2 * h * focal_length;
     auto viewport_width = viewport_height * (double(img_width)/img_height);
 
     // Calculate the vectors across the horizontal and down the vertical viewport edges.

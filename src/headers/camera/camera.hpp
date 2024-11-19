@@ -17,6 +17,7 @@ class camera {
         int    samples_per_pixel = 10;      // count for random samples per pixel
         int    max_depth         = 10;      // max depth for recursion
         bool   img_gen           = false;   // saves a png when true
+        double vfov              = 90;      // vertical viewing angle
 
         void render(const hittable&);
 
