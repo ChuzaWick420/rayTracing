@@ -22,6 +22,9 @@ class camera {
         point3 lookat            = point3(0, 0, -1);
         vec3   vup               = vec3(0, 1, 0);
 
+        double defocus_angle = 0;
+        double focus_dist = 10;
+
         void render(const hittable&);
 
         ~camera();
@@ -38,9 +41,14 @@ class camera {
         double pixel_samples_scale;      // Color scale factor for a sum of pixel samples
         vec3 u, v, w;
 
+        vec3 defocus_disk_u;
+        vec3 defocus_disk_v;
+
         void show_img();
 
         void initialize();
+
+        point3 defocus_disk_sample() const;
 
         vec3 sample_square();
         ray get_ray(int, int) const;
