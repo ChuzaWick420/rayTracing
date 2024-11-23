@@ -40,6 +40,7 @@ class camera {
         vec3 pixel_delta_v;            // Offset to pixel below
         double pixel_samples_scale;      // Color scale factor for a sum of pixel samples
         vec3 u, v, w;
+        sf::Image i_image;
 
         vec3 defocus_disk_u;
         vec3 defocus_disk_v;

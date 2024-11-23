@@ -13,19 +13,15 @@ void camera::show_img() {
 
     float scalar = float(window_width) / img_width;
 
-    //creates an image
-    sf::Image i_image;
-    i_image.create(img_width, img_height);
-
-    int index = 1;
-
-    for (auto pixel : pixel_grid) {
-        int x = (index - 1) % img_width;
-        int y = (index - 1) / img_width;
-        i_image.setPixel(x, y, pixel);
-
-        index++;
-    }
+    /*int index = 1;*/
+    /**/
+    /*for (auto pixel : pixel_grid) {*/
+    /*    int x = (index - 1) % img_width;*/
+    /*    int y = (index - 1) / img_width;*/
+    /*    i_image.setPixel(x, y, pixel);*/
+    /**/
+    /*    index++;*/
+    /*}*/
 
     sf::Texture t_image;
     t_image.loadFromImage(i_image);
@@ -73,6 +69,8 @@ void camera::render(const hittable& world) {
 
         write_color(&pixel, pixel_color * pixel_samples_scale);
 
+        this->i_image.setPixel(x, y, pixel);
+
         index++;
     }
 
@@ -86,6 +84,8 @@ void camera::initialize() {
     pixel_samples_scale = 1.0 / samples_per_pixel;
 
     center = lookfrom;
+
+    i_image.create(img_width, img_height);
 
     // Determine viewport dimensions.
     auto theta = degrees_to_radians(vfov);
