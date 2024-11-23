@@ -56,7 +56,12 @@ void camera::render(const hittable& world) {
 
     int index = 1;
 
+    int total_pixels = img_height * img_width;
+
     for (auto& pixel : pixel_grid) {
+
+        std::clog << "\rPercentage: " << int((index * 100) / total_pixels) << "% " << std::flush;
+
         color pixel_color(0, 0, 0);
 
         int x = (index - 1) % img_width;
@@ -73,6 +78,8 @@ void camera::render(const hittable& world) {
 
         index++;
     }
+
+    std::clog << "done\n";
 
    this->show_img();
 }
