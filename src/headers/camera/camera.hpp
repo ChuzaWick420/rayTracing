@@ -7,7 +7,10 @@
 #include "SFML/Graphics.hpp"
 
 #include "../main_header.hpp"
+
 #include <vector>
+#include <thread>
+#include <algorithm>
 
 class camera {
     public:
@@ -22,6 +25,8 @@ class camera {
         point3 lookat            = point3(0, 0, -1);
         vec3   vup               = vec3(0, 1, 0);
 
+        int threads = 1;
+
         double defocus_angle = 0;
         double focus_dist = 10;
 
@@ -32,6 +37,7 @@ class camera {
     private:
 
         std::vector<sf::Color> pixel_grid;
+        std::vector<std::thread> worker_threads;
         int window_width = 1024;
         int img_height;               // Rendered image height
         point3 center;                   // Camera center

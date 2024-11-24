@@ -38,40 +38,63 @@ void camera::show_img() {
 void camera::render(const hittable& world) {
     initialize();
 
-    pixel_grid.resize(img_height * img_width);
-
-    int index = 1;
-
     int total_pixels = img_height * img_width;
 
-    for (auto& pixel : pixel_grid) {
+    pixel_grid.resize(total_pixels);
 
-        std::clog << "\rPercentage: " << int((index * 100) / total_pixels) << "% " << std::flush;
+    int thread_load = total_pixels / threads;
 
-        color pixel_color(0, 0, 0);
+    for (int j = 1; j <= threads; j++) {
+        worker_threads.push_back(std::thread([&, j] {
 
-        int x = (index - 1) % img_width;
-        int y = (index - 1) / img_width;
+            int thread_id = j;
 
-        for (int sample = 0; sample < samples_per_pixel; sample++) {
-            ray r = get_ray(x, y);
-            pixel_color += ray_color(r, max_depth, world);
-        }
+            for (int i = 0; i < thread_load; i++) {
 
-        write_color(&pixel, pixel_color * pixel_samples_scale);
+                int offset = (thread_id - 1) * thread_load;
 
-        this->i_image.setPixel(x, y, pixel);
+                color pixel_color(0, 0, 0);
 
-        index++;
+                int x = i % img_width;
+                int y = (i + offset) / img_width;
+
+                for (int sample = 0; sample < samples_per_pixel; sample++) {
+                    ray r = get_ray(x, y);
+                    pixel_color += ray_color(r, max_depth, world);
+                }
+
+                write_color(&pixel_grid[y * img_width + x], pixel_color * pixel_samples_scale);
+
+                this->i_image.setPixel(x, y, pixel_grid[y * img_width + x]);
+
+                //debug
+                /*printf(*/
+                /*    "Thread_id: %d,\nThread_load: %d,\nOffset: %d,\nPosition: (%d, %d),\nColor: (%d, %d, %d),\n",*/
+                /*    thread_id,*/
+                /*    thread_load,*/
+                /*    offset,*/
+                /*    x, y,*/
+                /*    pixel_grid[i + offset].r, pixel_grid[i + offset].g, pixel_grid[i + offset].b*/
+                /*);*/
+            }
+
+        }));
     }
+
+    //waiting for threads
+    std::for_each(
+        worker_threads.begin(),
+        worker_threads.end(),
+        [](std::thread &t) {
+            t.join();
+        }
+    );
 
     // optionally save the image
     if (this->img_gen == true)
         i_image.saveToFile("rendered_img.png");
 
-    std::clog << "done\n";
-
-   this->show_img();
+    this->show_img();
 }
 
 void camera::initialize() {
