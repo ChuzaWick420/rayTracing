@@ -13,25 +13,11 @@ void camera::show_img() {
 
     float scalar = float(window_width) / img_width;
 
-    /*int index = 1;*/
-    /**/
-    /*for (auto pixel : pixel_grid) {*/
-    /*    int x = (index - 1) % img_width;*/
-    /*    int y = (index - 1) / img_width;*/
-    /*    i_image.setPixel(x, y, pixel);*/
-    /**/
-    /*    index++;*/
-    /*}*/
-
     sf::Texture t_image;
     t_image.loadFromImage(i_image);
 
     sf::Sprite s_image(t_image);
     s_image.setScale(sf::Vector2f(scalar, scalar));
-
-    // optionally save the image
-    if (this->img_gen == true)
-        i_image.saveToFile("rendered_img.png");
 
     while (window.isOpen()){
         sf::Event event;
@@ -78,6 +64,10 @@ void camera::render(const hittable& world) {
 
         index++;
     }
+
+    // optionally save the image
+    if (this->img_gen == true)
+        i_image.saveToFile("rendered_img.png");
 
     std::clog << "done\n";
 

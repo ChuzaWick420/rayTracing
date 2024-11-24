@@ -14,7 +14,7 @@ class sphere : public hittable {
         {}
 
 
-    bool sphere::hit(const ray& r, interval ray_t, hit_record& rec) const override {
+    bool hit(const ray& r, interval ray_t, hit_record& rec) const override {
         vec3 oc = center - r.origin();
         auto a = r.direction().length_squared();
         auto h = dot(r.direction(), oc);
