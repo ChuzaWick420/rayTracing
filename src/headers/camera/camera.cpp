@@ -4,7 +4,7 @@
 #include <cmath>
 #include <cstdint>
 
-void camera::show_img() {
+void Camera::show_img() {
 
     int window_height = window_width / aspect_ratio;
 
@@ -35,7 +35,7 @@ void camera::show_img() {
     }
 }
 
-void camera::render(const hittable& world) {
+void Camera::render(const Hittable& world) {
     initialize();
 
     int total_pixels = img_height * img_width;
@@ -53,13 +53,13 @@ void camera::render(const hittable& world) {
 
                 int offset = (thread_id - 1) * thread_load;
 
-                color pixel_color(0, 0, 0);
+                Color pixel_color(0, 0, 0);
 
                 int x = i % img_width;
                 int y = (i + offset) / img_width;
 
                 for (int sample = 0; sample < samples_per_pixel; sample++) {
-                    ray r = get_ray(x, y);
+                    Ray r = get_ray(x, y);
                     pixel_color += ray_color(r, max_depth, world);
                 }
 
@@ -97,7 +97,7 @@ void camera::render(const hittable& world) {
     this->show_img();
 }
 
-void camera::initialize() {
+void Camera::initialize() {
     img_height = int(img_width / aspect_ratio);
     img_height = (img_height < 1) ? 1 : img_height;
 
@@ -137,12 +137,12 @@ void camera::initialize() {
 }
 
 
-vec3 camera::sample_square() const {
+Vec3 Camera::sample_square() const {
     // Returns the vector to a random point in the [-.5,-.5]-[+.5,+.5] unit square.
-    return vec3(random_double() - 0.5, random_double() - 0.5, 0);
+    return Vec3(random_double() - 0.5, random_double() - 0.5, 0);
 }
 
-ray camera::get_ray(int u, int v) const {
+Ray Camera::get_ray(int u, int v) const {
 
     // Construct a camera ray originating from the defocus disk and directed at a randomly
     // sampled point around the pixel location u, v.
@@ -155,34 +155,34 @@ ray camera::get_ray(int u, int v) const {
     auto ray_origin = (defocus_angle <= 0) ? center : defocus_disk_sample();
     auto ray_direction = pixel_sample - ray_origin;
 
-    return ray(ray_origin, ray_direction);
+    return Ray(ray_origin, ray_direction);
 }
 
-point3 camera::defocus_disk_sample() const {
+Point3 Camera::defocus_disk_sample() const {
     auto p = random_in_unit_disk();
     return center + (p[0] * defocus_disk_u) + (p[1] * defocus_disk_v);
 }
 
-color camera::ray_color(const ray& r, int depth, const hittable& world) const {
+Color Camera::ray_color(const Ray& r, int depth, const Hittable& world) const {
     if (depth <= 0)
-        return color(0, 0, 0);
+        return Color(0, 0, 0);
 
-    hit_record rec;
+    Hit_record rec;
 
-    if (world.hit(r, interval(0.001, infinity), rec)) {
-        ray scattered;
-        color attenuation;
+    if (world.hit(r, Interval(0.001, infinity), rec)) {
+        Ray scattered;
+        Color attenuation;
 
         if (rec.mat->scatter(r, rec, attenuation, scattered))
             return attenuation * ray_color(scattered, depth-1, world);
 
-        return color(0,0,0);
+        return Color(0,0,0);
     }
 
-    vec3 unit_direction = unit_vector(r.direction());
+    Vec3 unit_direction = unit_vector(r.direction());
     auto a = 0.5*(unit_direction.y() + 1.0);
 
-    return (1.0-a)*color(1.0, 1.0, 1.0) + a*color(0.5, 0.7, 1.0);
+    return (1.0-a)*Color(1.0, 1.0, 1.0) + a*Color(0.5, 0.7, 1.0);
 }
 
-camera::~camera() {}
+Camera::~Camera() {}

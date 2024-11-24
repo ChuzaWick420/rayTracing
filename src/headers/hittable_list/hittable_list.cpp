@@ -1,18 +1,18 @@
 #include "./hittable_list.hpp"
 
 
-hittable_list::hittable_list() {}
+Hittable_list::Hittable_list() {}
 
 
-hittable_list::hittable_list(shared_ptr<hittable> object) {
+Hittable_list::Hittable_list(shared_ptr<Hittable> object) {
     add(object); 
 }
 
-void hittable_list::clear() {
+void Hittable_list::clear() {
     objects.clear(); 
 }
 
-void hittable_list::add(shared_ptr<hittable> object) {
+void Hittable_list::add(shared_ptr<Hittable> object) {
     objects.push_back(object);
 }
 

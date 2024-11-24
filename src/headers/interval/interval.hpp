@@ -3,13 +3,13 @@
 
 #include "../main_header.hpp"
 
-class interval {
+class Interval {
   public:
     double min, max;
 
-    interval() : min(+infinity), max(-infinity) {} // Default interval is empty
+    Interval() : min(+infinity), max(-infinity) {} // Default interval is empty
 
-    interval(double min, double max) : min(min), max(max) {}
+    Interval(double min, double max) : min(min), max(max) {}
 
     double size() const;
 
@@ -19,7 +19,7 @@ class interval {
 
     double clamp(double x) const;
 
-    static const interval empty, universe;
+    static const Interval empty, universe;
 };
 
 

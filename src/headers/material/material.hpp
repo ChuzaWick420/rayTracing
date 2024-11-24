@@ -4,12 +4,12 @@
 #include "../hittable/hittable.hpp"
 #include "../color3/color3.hpp"
 
-class material {
+class Material {
   public:
-    virtual ~material() = default;
+    virtual ~Material() = default;
 
     virtual bool scatter(
-        const ray& r_in, const hit_record& rec, color& attenuation, ray& scattered
+        const Ray& r_in, const Hit_record& rec, Color& attenuation, Ray& scattered
     ) const {
         return false;
     }

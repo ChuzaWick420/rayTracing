@@ -5,26 +5,26 @@
 #include "../vec3/vec3.hpp"
 #include "../ray/ray.hpp"
 
-class material;
+class Material;
 
-class hit_record {
+class Hit_record {
     public:
-        point3 p;
-        vec3 normal;
+        Point3 p;
+        Vec3 normal;
         double t;
         bool front_face;
 
-        shared_ptr<material> mat;
+        shared_ptr<Material> mat;
 
-        void set_face_normal(const ray&, const vec3&);
+        void set_face_normal(const Ray&, const Vec3&);
 
 };
 
-class hittable {
+class Hittable {
     public:
-        virtual ~hittable() = default;
+        virtual ~Hittable() = default;
 
-        virtual bool hit(const ray&, interval, hit_record&) const = 0;
+        virtual bool hit(const Ray&, Interval, Hit_record&) const = 0;
 };
 
 #endif

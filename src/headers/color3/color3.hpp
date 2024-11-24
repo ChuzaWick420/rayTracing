@@ -3,8 +3,8 @@
 
 #include "../vec3/vec3.hpp"
 
-using color = vec3;
+using Color = Vec3;
 
-void write_color(sf::Color*, const color&);
+void write_color(sf::Color*, const Color&);
 
 #endif

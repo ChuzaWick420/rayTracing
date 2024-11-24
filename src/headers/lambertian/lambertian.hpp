@@ -4,24 +4,24 @@
 #include "../material/material.hpp"
 #include "../color3/color3.hpp"
 
-class lambertian : public material {
+class Lambertian : public Material {
   public:
-    lambertian(const color& albedo) : albedo(albedo) {}
+    Lambertian(const Color& albedo) : albedo(albedo) {}
 
-    bool scatter(const ray& r_in, const hit_record& rec, color& attenuation, ray& scattered) const override {
+    bool scatter(const Ray& r_in, const Hit_record& rec, Color& attenuation, Ray& scattered) const override {
         auto scatter_direction = rec.normal + random_unit_vector();
 
         if (scatter_direction.near_zero())
             scatter_direction = rec.normal;
 
-        scattered = ray(rec.p, scatter_direction);
+        scattered = Ray(rec.p, scatter_direction);
 
         attenuation = albedo;
         return true;
     }
 
   private:
-    color albedo;
+    Color albedo;
 };
 
 #endif 
