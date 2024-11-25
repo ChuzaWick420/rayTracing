@@ -1,8 +1,7 @@
-#include "./camera.hpp"
+#include "../camera/camera.hpp"
+#include "../interval/interval.hpp"
+#include "../hit_record/hit_record.hpp"
 #include "../material/material.hpp"
-
-#include <cmath>
-#include <cstdint>
 
 void Camera::show_img() {
 

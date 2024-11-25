@@ -4,8 +4,6 @@
 #include "../vec3/vec3.hpp"
 #include "../ray/ray.hpp"
 
-#include "../utils.hpp"
-
 #include <memory>
 
 class Material;

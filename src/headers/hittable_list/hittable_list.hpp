@@ -4,19 +4,21 @@
 #include "../hittable/hittable.hpp"
 #include "../ray/ray.hpp"
 #include "../interval/interval.hpp"
+#include "../hit_record/hit_record.hpp"
 
-#include "../main_header.hpp"
+#include <vector>
+#include <memory>
 
 class Hittable_list : public Hittable {
     public:
-        std::vector<shared_ptr<Hittable>> objects;
+        std::vector<std::shared_ptr<Hittable>> objects;
 
         Hittable_list();
-        Hittable_list(shared_ptr<Hittable>);
+        Hittable_list(std::shared_ptr<Hittable>);
 
         void clear();
 
-        void add(shared_ptr<Hittable>);
+        void add(std::shared_ptr<Hittable>);
 
         bool hit(const Ray& r, Interval ray_t, Hit_record& rec) const override{
 

@@ -2,7 +2,10 @@
 #define LAMBERTIAN_HPP
 
 #include "../material/material.hpp"
-#include "../color3/color3.hpp"
+#include "../color/color.hpp"
+#include "../ray/ray.hpp"
+#include "../hit_record/hit_record.hpp"
+#include "../color/color.hpp"
 
 class Lambertian : public Material {
   public:

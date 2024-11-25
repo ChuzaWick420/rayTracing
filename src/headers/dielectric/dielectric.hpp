@@ -2,6 +2,14 @@
 #define DIELECTRIC_HPP
 
 #include "../material/material.hpp"
+#include "../ray/ray.hpp"
+#include "../color/color.hpp"
+#include "../hit_record/hit_record.hpp"
+#include "../vec3/vec3.hpp"
+
+#include "../utils.hpp"
+
+#include <cmath>
 
 class Dielectric : public Material {
   public:

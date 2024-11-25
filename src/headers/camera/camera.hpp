@@ -2,15 +2,13 @@
 #define CAMERA_HPP
 
 #include "../hittable/hittable.hpp"
+#include "../vec3/vec3.hpp"
 #include "../color/color.hpp"
-
-#include "SFML/Graphics.hpp"
-
-#include "../main_header.hpp"
 
 #include <vector>
 #include <thread>
-#include <algorithm>
+
+#include <SFML/Graphics.hpp>
 
 class Camera {
     public:

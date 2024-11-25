@@ -2,6 +2,12 @@
 #define METAL_HPP
 
 #include "../material/material.hpp"
+#include "../color/color.hpp"
+#include "../hit_record/hit_record.hpp"
+#include "../ray/ray.hpp"
+#include "../vec3/vec3.hpp"
+
+#include "../utils.hpp"
 
 class Metal : public Material {
     public:
