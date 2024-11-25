@@ -2,7 +2,8 @@
 #define MATERIAL_HPP
 
 #include "../hittable/hittable.hpp"
-#include "../color3/color3.hpp"
+#include "../color/color.hpp"
+#include "../ray/ray.hpp"
 
 class Material {
   public:

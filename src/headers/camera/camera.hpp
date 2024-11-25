@@ -2,7 +2,7 @@
 #define CAMERA_HPP
 
 #include "../hittable/hittable.hpp"
-#include "../color3/color3.hpp"
+#include "../color/color.hpp"
 
 #include "SFML/Graphics.hpp"
 

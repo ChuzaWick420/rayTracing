@@ -7,8 +7,6 @@
 
 #include "../main_header.hpp"
 
-#include <vector>
-
 class Hittable_list : public Hittable {
     public:
         std::vector<shared_ptr<Hittable>> objects;

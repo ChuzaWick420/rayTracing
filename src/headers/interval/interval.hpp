@@ -1,7 +1,7 @@
 #ifndef INTERVAL_HPP
 #define INTERVAL_HPP
 
-#include "../main_header.hpp"
+#include "../utils.hpp"
 
 class Interval {
   public:

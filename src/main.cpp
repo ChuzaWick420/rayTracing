@@ -7,7 +7,7 @@
 #include "./headers/metal/metal.hpp"
 #include "./headers/dielectric/dielectric.hpp"
 
-#include "./headers/main_header.hpp"
+#include "./headers/utils.hpp"
 
 int main () {
 

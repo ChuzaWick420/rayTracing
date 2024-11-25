@@ -1,4 +1,4 @@
-#include "./color3.hpp"
+#include "./color.hpp"
 #include "../interval/interval.hpp"
 
 #include "SFML/Graphics.hpp"

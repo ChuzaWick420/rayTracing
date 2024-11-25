@@ -1,5 +1,4 @@
-#include "./hittable.hpp"
-
+#include "./hit_record.hpp"
 
 void Hit_record::set_face_normal(const Ray& r, const Vec3& outward_normal) {
     // Sets the hit record normal vector.

@@ -1,5 +1,4 @@
 #include "./vec3.hpp"
-#include <iostream>
 
 Vec3::Vec3() {
     e[0] = 0;
