@@ -1,6 +1,11 @@
 # Ray Tracing
 This project uses the [SFML CMAKE Template](https://github.com/SFML/cmake-sfml-project) for [SFML](https://www.sfml-dev.org/) integration.
 
+## Pre-requisites
+- [Cmake 3.27](https://cmake.org/) or above
+- [Git](https://git-scm.com/)
+- A toolchain ([Visual Studio](https://visualstudio.microsoft.com/) is recommended because it saves one from a lot of headache)
+
 ## Usage
 - Clone the repo
 ```bash
