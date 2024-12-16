@@ -29,8 +29,8 @@ int main () {
 
     // Image specifications
     cam.aspect_ratio      = 16.0 / 9.0;
-    cam.img_width         = 1024;
-    cam.samples_per_pixel = 500;
+    cam.img_width         = 200;
+    cam.samples_per_pixel = 1;
     cam.max_depth         = 50;
 
     // I/O utilities
