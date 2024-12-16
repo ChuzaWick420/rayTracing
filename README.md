@@ -23,4 +23,4 @@ build/bin/Release/main.exe
 #### Near completion
 ![pre_final](./img_1.png)
 #### Final Render
-![pre_final](./img_2.png)
+![final](./img_2.jpg)
