@@ -24,3 +24,6 @@ build/bin/Release/main.exe
 ![pre_final](./img_1.png)
 #### Final Render
 ![final](./img_2.jpg)
+
+## Documentation
+The documentation is available on my [notes_publisher](https://chuzawick420.github.io/notes_publisher/Projects/rayTracing/Main/).
