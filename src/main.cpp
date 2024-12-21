@@ -11,7 +11,7 @@
 
 int main () {
 
-    Hittable_list world;
+    Hittable_list HL_world;
 
     auto ground_material = std::make_shared<Lambertian> (Color(0.5, 0.5, 0.5));
     auto bubble          = std::make_shared<Dielectric> (1.00 / 1.50);
@@ -19,11 +19,11 @@ int main () {
     auto material2       = std::make_shared<Lambertian> (Color(0.4, 0.2, 0.1));
     auto material3       = std::make_shared<Metal>      (Color(0.7, 0.6, 0.5), 0.0);
 
-    world.add(std::make_shared<Sphere>(Point3( 0  ,  1   ,  0), 1.0 , material1));
-    world.add(std::make_shared<Sphere>(Point3( 0  , -1000,  0), 1000, ground_material));
-    world.add(std::make_shared<Sphere>(Point3( 0  ,  1   ,  0), 0.85, bubble));
-    world.add(std::make_shared<Sphere>(Point3( 1.5,  1.2 , -2), 1.0 , material2));
-    world.add(std::make_shared<Sphere>(Point3(-1.7,  1.8 , -2), 1.0 , material3));
+    HL_world.add(std::make_shared<Sphere>(Point3( 0  ,  1   ,  0), 1.0 , material1));
+    HL_world.add(std::make_shared<Sphere>(Point3( 0  , -1000,  0), 1000, ground_material));
+    HL_world.add(std::make_shared<Sphere>(Point3( 0  ,  1   ,  0), 0.85, bubble));
+    HL_world.add(std::make_shared<Sphere>(Point3( 1.5,  1.2 , -2), 1.0 , material2));
+    HL_world.add(std::make_shared<Sphere>(Point3(-1.7,  1.8 , -2), 1.0 , material3));
 
     Camera cam;
 
@@ -47,7 +47,7 @@ int main () {
     cam.defocus_angle = 0.6;
     cam.focus_dist    = 10.0;
 
-    cam.render(world);
+    cam.render(HL_world);
 
     return 0;
 }
