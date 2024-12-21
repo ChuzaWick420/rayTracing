@@ -4,26 +4,30 @@
 #include "../utils.hpp"
 #include "SFML/Graphics.hpp"
 
+enum Axes {
+    x, y, z
+};
+
 class Vec3 {
   public:
-    double e[3];
+    double axes[3];
 
     Vec3();
-    Vec3(double e0, double e1, double e2);
+    Vec3(double, double, double);
 
     double x() const;
     double y() const;
     double z() const;
 
     Vec3 operator-() const;
-    double operator[](int i) const;
-    double& operator[](int i);
+    double operator[](int) const;
+    double& operator[](int);
 
-    Vec3& operator+=(const Vec3& v);
+    Vec3& operator+=(const Vec3&);
 
-    Vec3& operator*=(double t);
+    Vec3& operator*=(double);
 
-    Vec3& operator/=(double t);
+    Vec3& operator/=(double);
 
     double length() const;
 
@@ -43,46 +47,64 @@ class Vec3 {
 // Point3 is just an alias for Vec3, but useful for geometric clarity in the code.
 using Point3 = Vec3;
 
-inline void operator<<(sf::Color& pixel, const Vec3& v) {
-    pixel.r = v.e[0];
-    pixel.g = v.e[1];
-    pixel.b = v.e[2];
+inline void operator<<(sf::Color& pixel, const Vec3& vec) {
+    pixel.r = vec.axes[Axes::x];
+    pixel.g = vec.axes[Axes::y];
+    pixel.b = vec.axes[Axes::z];
 }
 
-inline Vec3 operator+(const Vec3& u, const Vec3& v) {
-    return Vec3(u.e[0] + v.e[0], u.e[1] + v.e[1], u.e[2] + v.e[2]);
+inline Vec3 operator + (const Vec3& u, const Vec3& v) {
+    return Vec3(
+        u.axes[Axes::x] + v.axes[Axes::x],
+        u.axes[Axes::y] + v.axes[Axes::y],
+        u.axes[Axes::z] + v.axes[Axes::z]
+    );
 }
 
-inline Vec3 operator-(const Vec3& u, const Vec3& v) {
-    return Vec3(u.e[0] - v.e[0], u.e[1] - v.e[1], u.e[2] - v.e[2]);
+inline Vec3 operator - (const Vec3& u, const Vec3& v) {
+    return Vec3(
+        u.axes[Axes::x] - v.axes[Axes::x],
+        u.axes[Axes::y] - v.axes[Axes::y],
+        u.axes[Axes::z] - v.axes[Axes::z]
+    );
 }
 
-inline Vec3 operator*(const Vec3& u, const Vec3& v) {
-    return Vec3(u.e[0] * v.e[0], u.e[1] * v.e[1], u.e[2] * v.e[2]);
+inline Vec3 operator * (const Vec3& u, const Vec3& v) {
+    return Vec3(
+        u.axes[Axes::x] * v.axes[Axes::x],
+        u.axes[Axes::y] * v.axes[Axes::y],
+        u.axes[Axes::z] * v.axes[Axes::z]
+    );
 }
 
-inline Vec3 operator*(double t, const Vec3& v) {
-    return Vec3(t*v.e[0], t*v.e[1], t*v.e[2]);
+inline Vec3 operator * (double t, const Vec3& v) {
+    return Vec3(
+        t * v.axes[Axes::x],
+        t * v.axes[Axes::y],
+        t * v.axes[Axes::z]
+    );
 }
 
-inline Vec3 operator*(const Vec3& v, double t) {
+inline Vec3 operator * (const Vec3& v, double t) {
     return t * v;
 }
 
-inline Vec3 operator/(const Vec3& v, double t) {
-    return (1/t) * v;
+inline Vec3 operator / (const Vec3& v, double t) {
+    return (1 / t) * v;
 }
 
 inline double dot(const Vec3& u, const Vec3& v) {
-    return u.e[0] * v.e[0]
-         + u.e[1] * v.e[1]
-         + u.e[2] * v.e[2];
+    return u.axes[Axes::x] * v.axes[Axes::x]
+         + u.axes[Axes::y] * v.axes[Axes::y]
+         + u.axes[Axes::z] * v.axes[Axes::z];
 }
 
 inline Vec3 cross(const Vec3& u, const Vec3& v) {
-    return Vec3(u.e[1] * v.e[2] - u.e[2] * v.e[1],
-                u.e[2] * v.e[0] - u.e[0] * v.e[2],
-                u.e[0] * v.e[1] - u.e[1] * v.e[0]);
+    return Vec3(
+        u.axes[Axes::y] * v.axes[Axes::z] - u.axes[Axes::z] * v.axes[Axes::y],
+        u.axes[Axes::z] * v.axes[Axes::x] - u.axes[Axes::x] * v.axes[Axes::z],
+        u.axes[Axes::x] * v.axes[Axes::y] - u.axes[Axes::y] * v.axes[Axes::x]
+    );
 }
 
 inline Vec3 unit_vector(const Vec3& v) {
