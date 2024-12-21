@@ -13,41 +13,41 @@ int main () {
 
     Hittable_list HL_world;
 
-    auto L_ground_material = std::make_shared<Lambertian> (Color(0.5, 0.5, 0.5));
-    auto D_bubble          = std::make_shared<Dielectric> (1.00 / 1.50);
-    auto D_material1       = std::make_shared<Dielectric> (1.5);
-    auto L_material2       = std::make_shared<Lambertian> (Color(0.4, 0.2, 0.1));
-    auto M_material3       = std::make_shared<Metal>      (Color(0.7, 0.6, 0.5), 0.0);
+    auto Lam_ground_material = std::make_shared<Lambertian> (Color(0.5, 0.5, 0.5));
+    auto Di_bubble          = std::make_shared<Dielectric> (1.00 / 1.50);
+    auto Di_material1       = std::make_shared<Dielectric> (1.5);
+    auto Lam_material2       = std::make_shared<Lambertian> (Color(0.4, 0.2, 0.1));
+    auto Met_material3       = std::make_shared<Metal>      (Color(0.7, 0.6, 0.5), 0.0);
 
-    HL_world.add(std::make_shared<Sphere>(Point3( 0  ,  1   ,  0), 1.0 , D_material1));
-    HL_world.add(std::make_shared<Sphere>(Point3( 0  , -1000,  0), 1000, L_ground_material));
-    HL_world.add(std::make_shared<Sphere>(Point3( 0  ,  1   ,  0), 0.85, D_bubble));
-    HL_world.add(std::make_shared<Sphere>(Point3( 1.5,  1.2 , -2), 1.0 , L_material2));
-    HL_world.add(std::make_shared<Sphere>(Point3(-1.7,  1.8 , -2), 1.0 , M_material3));
+    HL_world.add(std::make_shared<Sphere>(Point3( 0  ,  1   ,  0), 1.0 , Di_material1));
+    HL_world.add(std::make_shared<Sphere>(Point3( 0  , -1000,  0), 1000, Lam_ground_material));
+    HL_world.add(std::make_shared<Sphere>(Point3( 0  ,  1   ,  0), 0.85, Di_bubble));
+    HL_world.add(std::make_shared<Sphere>(Point3( 1.5,  1.2 , -2), 1.0 , Lam_material2));
+    HL_world.add(std::make_shared<Sphere>(Point3(-1.7,  1.8 , -2), 1.0 , Met_material3));
 
-    Camera cam;
+    Camera Cam_camera;
 
     // Image specifications
-    cam.aspect_ratio      = 16.0 / 9.0;
-    cam.img_width         = 200;
-    cam.samples_per_pixel = 1;
-    cam.max_depth         = 50;
+    Cam_camera.aspect_ratio      = 16.0 / 9.0;
+    Cam_camera.img_width         = 200;
+    Cam_camera.samples_per_pixel = 1;
+    Cam_camera.max_depth         = 50;
 
     // I/O utilities
-    cam.threads = 4;
-    cam.img_gen = true;
+    Cam_camera.threads = 4;
+    Cam_camera.img_gen = true;
 
     // Camera Orientation
-    cam.vfov     = 25;
-    cam.lookfrom = Point3(0,3,10);
-    cam.lookat   = Point3(0,1,0);
-    cam.vup      = Vec3(0,3,0);
+    Cam_camera.vfov     = 25;
+    Cam_camera.lookfrom = Point3(0,3,10);
+    Cam_camera.lookat   = Point3(0,1,0);
+    Cam_camera.vup      = Vec3(0,3,0);
 
     // Camera Lens
-    cam.defocus_angle = 0.6;
-    cam.focus_dist    = 10.0;
+    Cam_camera.defocus_angle = 0.6;
+    Cam_camera.focus_dist    = 10.0;
 
-    cam.render(HL_world);
+    Cam_camera.render(HL_world);
 
     return 0;
 }
