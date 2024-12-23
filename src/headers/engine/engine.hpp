@@ -2,12 +2,14 @@
 #define ENGINE_HPP
 
 #include "../camera/camera.hpp"
+#include "../window_manager/window_manager.hpp"
+#include "../scene/scene.hpp"
 
 #include "../config.hpp"
 
 class Engine {
     public:
-        Engine(Configuration C_config);
+        Engine(Configuration);
         void run();
 
     private:

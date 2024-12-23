@@ -2,20 +2,24 @@
 #define CONFIG_HPP
 
 #include "./vec3/vec3.hpp"
+#include "./lambertian/lambertian.hpp"
+#include "./metal/metal.hpp"
+#include "./dielectric/dielectric.hpp"
 
 #include <string>
+#include <vector>
+#include <memory>
 
 #include <SFML/Graphics.hpp>
 
 enum Material_id_map {
     LAMBERTIAN, 
     DIELECTRIC,
-    METAL,
-    MATT
+    METAL
 };
 
-struct Objects {
-    Vec3 v3_pos;
+struct Object {
+    Point3 p3_pos;
     float f_radius;
     int u_material_id;
 };
@@ -37,8 +41,8 @@ struct Configuration {
     float f_local_length = 10.0;
     std::string title = "Ray Tracing";
 
-    Objects[] = {
-        {Vec3(0, 0, 0), 0.5, Material_id_map::MATT},
+    std::vector<Object> objects = {
+        {Vec3(0, 0, 0), 0.5, Material_id_map::LAMBERTIAN},
         {Vec3(0, 1, 0), 0.7, Material_id_map::METAL}
     };
 };
