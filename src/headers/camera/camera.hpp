@@ -28,7 +28,7 @@ class Camera {
         double defocus_angle = 0;
         double focus_dist = 10;
 
-        void render(const Hittable&);
+        sf::Image* render(const Hittable&);
 
         ~Camera();
 

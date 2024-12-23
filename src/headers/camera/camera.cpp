@@ -3,38 +3,9 @@
 #include "../hit_record/hit_record.hpp"
 #include "../material/material.hpp"
 
-void Camera::show_img() {
+#include <cmath>
 
-    int window_height = window_width / aspect_ratio;
-
-    // Window to render image on
-    sf::RenderWindow window(sf::VideoMode(window_width, window_height), "Ray Tracing", sf::Style::Default);
-
-    float scalar = float(window_width) / img_width;
-
-    sf::Texture t_image;
-    t_image.loadFromImage(i_image);
-
-    sf::Sprite s_image(t_image);
-    s_image.setScale(sf::Vector2f(scalar, scalar));
-
-    while (window.isOpen()){
-        sf::Event event;
-
-        while(window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear(sf::Color::Green);
-
-        window.draw(s_image);
-
-        window.display();
-    }
-}
-
-void Camera::render(const Hittable& world) {
+sf::Image* Camera::render(const Hittable& world) {
     initialize();
 
     int total_pixels = img_height * img_width;
@@ -66,15 +37,6 @@ void Camera::render(const Hittable& world) {
 
                 this->i_image.setPixel(x, y, pixel_grid[y * img_width + x]);
 
-                //debug
-                /*printf(*/
-                /*    "Thread_id: %d,\nThread_load: %d,\nOffset: %d,\nPosition: (%d, %d),\nColor: (%d, %d, %d),\n",*/
-                /*    thread_id,*/
-                /*    thread_load,*/
-                /*    offset,*/
-                /*    x, y,*/
-                /*    pixel_grid[i + offset].r, pixel_grid[i + offset].g, pixel_grid[i + offset].b*/
-                /*);*/
             }
 
         }));
@@ -89,15 +51,11 @@ void Camera::render(const Hittable& world) {
         }
     );
 
-    // optionally save the image
-    if (this->img_gen == true)
-        i_image.saveToFile("rendered_img.png");
-
-    this->show_img();
+    return &i_image;
 }
 
 void Camera::initialize() {
-    img_height = int(img_width / aspect_ratio);
+    img_height = std::ceil(img_width / aspect_ratio);
     img_height = (img_height < 1) ? 1 : img_height;
 
     pixel_samples_scale = 1.0 / samples_per_pixel;

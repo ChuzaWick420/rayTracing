@@ -16,6 +16,7 @@ class Engine {
         Window_manager WM_window;
         Scene S_scene;
         Camera Cam_camera;
+        bool save_img = false;
 };
 
 #endif

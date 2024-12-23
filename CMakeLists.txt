@@ -13,7 +13,7 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(main src/main.cpp src/headers/camera/camera.cpp src/headers/interval/interval.cpp src/headers/hit_record/hit_record.cpp src/headers/hittable_list/hittable_list.cpp src/headers/ray/ray.cpp src/headers/color/color.cpp src/headers/vec3/vec3.cpp src/headers/engine/engine.cpp src/headers/scene/scene.cpp src/headers/window_manager/window_manager.cpp src/headers/config/predefined_materials.cpp)
+add_executable(main src/main.cpp src/headers/camera/camera.cpp src/headers/interval/interval.cpp src/headers/hit_record/hit_record.cpp src/headers/hittable_list/hittable_list.cpp src/headers/ray/ray.cpp src/headers/color/color.cpp src/headers/vec3/vec3.cpp src/headers/engine/engine.cpp src/headers/scene/scene.cpp src/headers/window_manager/window_manager.cpp)
 target_link_libraries(main PRIVATE sfml-graphics)
 target_compile_features(main PRIVATE cxx_std_17)
 
