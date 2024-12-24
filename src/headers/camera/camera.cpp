@@ -80,12 +80,12 @@ void Camera::initialize() {
     auto viewport_v = viewport_height * -v;
 
     // Calculate the horizontal and vertical delta vectors from pixel to pixel.
-    pixel_delta_u = viewport_u / u_img_width;
-    pixel_delta_v = viewport_v / u_img_height;
+    V3_pixel_delta_u = viewport_u / u_img_width;
+    V3_pixel_delta_v = viewport_v / u_img_height;
 
     // Calculate the location of the upper left pixel.
     auto viewport_upper_left = P3_center - (d_focal_length * w) - viewport_u/2 - viewport_v/2;
-    P3_pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
+    P3_pixel00_loc = viewport_upper_left + 0.5 * (V3_pixel_delta_u + V3_pixel_delta_v);
 
     // Calculate the camera defocus disk basis vectors
     auto defocus_radius = d_focal_length * std::tan(degrees_to_radians(d_defocus_angle / 2));
@@ -106,8 +106,8 @@ Ray Camera::get_ray(int u, int v) const {
 
     auto offset = sample_square();
     auto pixel_sample = P3_pixel00_loc
-                        + ((u + offset.x()) * pixel_delta_u)
-                        + ((v + offset.y()) * pixel_delta_v);
+                        + ((u + offset.x()) * V3_pixel_delta_u)
+                        + ((v + offset.y()) * V3_pixel_delta_v);
 
     auto ray_origin = (d_defocus_angle <= 0) ? P3_center : defocus_disk_sample();
     auto ray_direction = pixel_sample - ray_origin;
