@@ -58,7 +58,7 @@ class Camera {
         std::vector<std::thread> threads;
         unsigned int u_img_height;               // Rendered image height
         Point3 P3_center;                   // Camera center
-        Point3 pixel00_loc;              // Location of pixel 0, 0
+        Point3 P3_pixel00_loc;              // Location of pixel 0, 0
         Vec3 pixel_delta_u;            // Offset to pixel to the right
         Vec3 pixel_delta_v;            // Offset to pixel below
         double pixel_samples_scale;      // Color scale factor for a sum of pixel samples
