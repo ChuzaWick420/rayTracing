@@ -64,8 +64,8 @@ class Camera {
         double d_pixel_samples_scale;      // Color scale factor for a sum of pixel samples
         Vec3 u, v, w;
         sf::Image i_image;
-        Vec3 defocus_disk_u;        // Horizontal radius
-        Vec3 defocus_disk_v;        // Vertical radius
+        Vec3 V3_defocus_disk_u;        // Horizontal radius
+        Vec3 V3_defocus_disk_v;        // Vertical radius
         void initialize();
         Point3 defocus_disk_sample() const;
         Vec3 sample_square();

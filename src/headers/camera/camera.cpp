@@ -89,8 +89,8 @@ void Camera::initialize() {
 
     // Calculate the camera defocus disk basis vectors
     auto defocus_radius = d_focal_length * std::tan(degrees_to_radians(d_defocus_angle / 2));
-    defocus_disk_u = u * defocus_radius;
-    defocus_disk_v = v * defocus_radius;
+    V3_defocus_disk_u = u * defocus_radius;
+    V3_defocus_disk_v = v * defocus_radius;
 }
 
 
@@ -117,7 +117,7 @@ Ray Camera::get_ray(int u, int v) const {
 
 Point3 Camera::defocus_disk_sample() const {
     auto p = random_in_unit_disk();
-    return P3_center + (p[0] * defocus_disk_u) + (p[1] * defocus_disk_v);
+    return P3_center + (p[0] * V3_defocus_disk_u) + (p[1] * V3_defocus_disk_v);
 }
 
 Color Camera::ray_color(const Ray& r, int depth, const Hittable& world) const {
