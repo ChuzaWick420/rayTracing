@@ -60,7 +60,7 @@ void Camera::initialize() {
 
     pixel_samples_scale = 1.0 / u_samples_per_pixel;
 
-    center = P3_origin;
+    P3_center = P3_origin;
 
     i_image.create(u_img_width, u_img_height);
 
@@ -84,7 +84,7 @@ void Camera::initialize() {
     pixel_delta_v = viewport_v / u_img_height;
 
     // Calculate the location of the upper left pixel.
-    auto viewport_upper_left = center - (d_focal_length * w) - viewport_u/2 - viewport_v/2;
+    auto viewport_upper_left = P3_center - (d_focal_length * w) - viewport_u/2 - viewport_v/2;
     pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
 
     // Calculate the camera defocus disk basis vectors
@@ -109,7 +109,7 @@ Ray Camera::get_ray(int u, int v) const {
                         + ((u + offset.x()) * pixel_delta_u)
                         + ((v + offset.y()) * pixel_delta_v);
 
-    auto ray_origin = (d_defocus_angle <= 0) ? center : defocus_disk_sample();
+    auto ray_origin = (d_defocus_angle <= 0) ? P3_center : defocus_disk_sample();
     auto ray_direction = pixel_sample - ray_origin;
 
     return Ray(ray_origin, ray_direction);
@@ -117,7 +117,7 @@ Ray Camera::get_ray(int u, int v) const {
 
 Point3 Camera::defocus_disk_sample() const {
     auto p = random_in_unit_disk();
-    return center + (p[0] * defocus_disk_u) + (p[1] * defocus_disk_v);
+    return P3_center + (p[0] * defocus_disk_u) + (p[1] * defocus_disk_v);
 }
 
 Color Camera::ray_color(const Ray& r, int depth, const Hittable& world) const {
