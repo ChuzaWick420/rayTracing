@@ -8,7 +8,7 @@
 class Window_manager {
     public:
         Window_manager(std::string, sf::Vector2u, sf::Color);
-        void display(const sf::Image*);
+        void display(const sf::Image* const);
 
     private:
         unsigned int u_width;

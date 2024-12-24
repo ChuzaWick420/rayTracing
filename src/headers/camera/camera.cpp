@@ -55,7 +55,7 @@ sf::Image* Camera::render(const Hittable& world) {
 }
 
 void Camera::initialize() {
-    img_height = std::ceil(img_width / aspect_ratio);
+    img_height = std::ceil(float(img_width) / aspect_ratio);
     img_height = (img_height < 1) ? 1 : img_height;
 
     pixel_samples_scale = 1.0 / samples_per_pixel;
@@ -140,6 +140,96 @@ Color Camera::ray_color(const Ray& r, int depth, const Hittable& world) const {
     auto a = 0.5*(unit_direction.y() + 1.0);
 
     return (1.0-a)*Color(1.0, 1.0, 1.0) + a*Color(0.5, 0.7, 1.0);
+}
+
+// getters
+double Camera::get_aspect_ratio() const {
+    return aspect_ratio;
+}
+
+int Camera::get_img_width() const {
+    return img_width;
+}
+
+int Camera::get_samples_per_pixel() const {
+    return samples_per_pixel;
+}
+
+int Camera::get_max_depth() const {
+    return max_depth;
+}
+
+double Camera::get_vfov() const {
+    return vfov;
+}
+
+Point3 Camera::get_lookfrom() const {
+    return lookfrom;
+}
+
+Point3 Camera::get_lookat() const {
+    return lookat;
+}
+
+Vec3 Camera::get_vup() const {
+    return vup;
+}
+
+int Camera::get_threads() const {
+    return threads;
+}
+
+double Camera::get_defocus_angle() const {
+    return defocus_angle;
+}
+
+double Camera::get_focus_dist() const {
+    return focus_dist;
+}
+
+// setters
+void Camera::set_aspect_ratio(double aspect_ratio) {
+    this->aspect_ratio = aspect_ratio;
+}
+
+void Camera::set_img_width(int img_width) {
+    this->img_width = img_width;
+}
+
+void Camera::set_samples_per_pixel(int samples_per_pixel) {
+    this->samples_per_pixel = samples_per_pixel;
+}
+
+void Camera::set_max_depth(int max_depth) {
+    this->max_depth = max_depth;
+}
+
+void Camera::set_vfov(double vfov) {
+    this->vfov = vfov;
+}
+
+void Camera::set_lookfrom(Point3 lookfrom) {
+    this->lookfrom = lookfrom;
+}
+
+void Camera::set_lookat(Point3 lookat) {
+    this->lookat = lookat;
+}
+
+void Camera::set_vup(Vec3 vup) {
+    this->vup = vup;
+}
+
+void Camera::set_threads(int threads) {
+    this->threads = threads;
+}
+
+void Camera::set_defocus_angle(double defocus_angle) {
+    this->defocus_angle = defocus_angle;
+}
+
+void Camera::set_focus_dist(double focus_dist) {
+    this->focus_dist = focus_dist;
 }
 
 Camera::~Camera() {}

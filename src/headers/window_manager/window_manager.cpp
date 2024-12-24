@@ -9,7 +9,7 @@ Window_manager::Window_manager(std::string title, sf::Vector2u dimensions, sf::C
     clr_bg_color(background)
 {}
 
-void Window_manager::display(const sf::Image* img) {
+void Window_manager::display(const sf::Image* const img) {
 
     sf::Texture T_img;
     T_img.loadFromImage(*img);
@@ -17,7 +17,6 @@ void Window_manager::display(const sf::Image* img) {
     sf::Sprite S_img(T_img);
 
     float scalar = float(u_width) / img->getSize().x;
-
     S_img.scale(sf::Vector2f(scalar, scalar));
 
     // debug

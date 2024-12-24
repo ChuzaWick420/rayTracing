@@ -16,17 +16,17 @@ Engine::Engine(Configuration C_config) :
     save_img(C_config.b_img_gen_permission)
 {
 
-    Cam_camera.aspect_ratio      = C_config.f_aspect_ratio;
-    Cam_camera.img_width         = C_config.u_img_width;
-    Cam_camera.samples_per_pixel = C_config.u_samples_per_pixel;
-    Cam_camera.max_depth         = C_config.u_max_depth;
-    Cam_camera.threads           = C_config.u_max_threads;
-    Cam_camera.vfov              = C_config.i_vfov;
-    Cam_camera.lookfrom          = C_config.p3_cam_origin;
-    Cam_camera.lookat            = C_config.p3_target_capture_pos;
-    Cam_camera.vup               = C_config.v3_cam_height;
-    Cam_camera.defocus_angle     = C_config.f_cam_defocus_angle;
-    Cam_camera.focus_dist        = C_config.f_local_length;
+    Cam_camera.set_aspect_ratio(C_config.f_aspect_ratio);
+    Cam_camera.set_img_width(C_config.u_img_width);
+    Cam_camera.set_samples_per_pixel(C_config.u_samples_per_pixel);
+    Cam_camera.set_max_depth(C_config.u_max_depth);
+    Cam_camera.set_threads(C_config.u_max_threads);
+    Cam_camera.set_vfov(C_config.i_vfov);
+    Cam_camera.set_lookfrom(C_config.p3_cam_origin);
+    Cam_camera.set_lookat(C_config.p3_target_capture_pos);
+    Cam_camera.set_vup(C_config.v3_cam_height);
+    Cam_camera.set_defocus_angle(C_config.f_cam_defocus_angle);
+    Cam_camera.set_focus_dist(C_config.f_local_length);
 
 }
 
