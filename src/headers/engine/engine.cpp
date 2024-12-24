@@ -20,7 +20,7 @@ Engine::Engine(Configuration C_config) :
     Cam_camera.set_img_width(C_config.u_img_width);
     Cam_camera.set_samples_per_pixel(C_config.u_samples_per_pixel);
     Cam_camera.set_max_light_bounce(C_config.u_max_light_bounce);
-    Cam_camera.set_threads(C_config.u_max_threads);
+    Cam_camera.set_threads_count(C_config.u_max_threads);
     Cam_camera.set_vfov(C_config.i_vfov);
     Cam_camera.set_origin(C_config.P3_cam_origin);
     Cam_camera.set_capture_target_pos(C_config.P3_target_capture_pos);

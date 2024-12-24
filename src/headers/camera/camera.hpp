@@ -23,7 +23,7 @@ class Camera {
         Point3 get_origin() const;
         Point3 get_capture_target_pos() const;
         Vec3 get_y_unit() const;
-        int get_threads() const;
+        int get_threads_count() const;
         double get_defocus_angle() const;
         double get_focus_dist() const;
 
@@ -36,7 +36,7 @@ class Camera {
         void set_origin(Point3);
         void set_capture_target_pos(Point3);
         void set_y_unit(Vec3);
-        void set_threads(int);
+        void set_threads_count(int);
         void set_defocus_angle(double);
         void set_focus_dist(double);
 
@@ -52,7 +52,7 @@ class Camera {
         Point3 P3_origin = Point3(0, 0, 0);
         Point3 P3_capture_target_pos = Point3(0, 0, -1);
         Vec3   V3_y_unit               = Vec3(0, 1, 0);
-        int threads = 1;
+        unsigned int u_threads_count = 1;
         double defocus_angle = 0;
         double focus_dist = 10;
         std::vector<std::thread> worker_threads;

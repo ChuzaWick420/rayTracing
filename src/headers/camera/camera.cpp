@@ -12,9 +12,9 @@ sf::Image* Camera::render(const Hittable& world) {
 
     pixel_grid.resize(total_pixels);
 
-    int thread_load = total_pixels / threads;
+    int thread_load = total_pixels / u_threads_count;
 
-    for (int j = 1; j <= threads; j++) {
+    for (int j = 1; j <= u_threads_count; j++) {
         worker_threads.push_back(std::thread([&, j] {
 
             int thread_id = j;
@@ -175,8 +175,8 @@ Vec3 Camera::get_y_unit() const {
     return V3_y_unit;
 }
 
-int Camera::get_threads() const {
-    return threads;
+int Camera::get_threads_count() const {
+    return u_threads_count;
 }
 
 double Camera::get_defocus_angle() const {
@@ -220,8 +220,8 @@ void Camera::set_y_unit(Vec3 vup) {
     this->V3_y_unit = vup;
 }
 
-void Camera::set_threads(int threads) {
-    this->threads = threads;
+void Camera::set_threads_count(int threads) {
+    this->u_threads_count = threads;
 }
 
 void Camera::set_defocus_angle(double defocus_angle) {
