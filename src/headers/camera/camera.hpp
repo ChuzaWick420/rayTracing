@@ -18,7 +18,7 @@ class Camera {
         double get_aspect_ratio() const;
         int get_img_width() const;
         int get_samples_per_pixel() const;
-        int get_max_depth() const;
+        int get_max_light_bounce() const;
         double get_vfov() const;
         Point3 get_lookfrom() const;
         Point3 get_lookat() const;
@@ -31,7 +31,7 @@ class Camera {
         void set_aspect_ratio(double);
         void set_img_width(int);
         void set_samples_per_pixel(int);
-        void set_max_depth(int);
+        void set_max_light_bounce(int);
         void set_vfov(double);
         void set_lookfrom(Point3);
         void set_lookat(Point3);
@@ -46,8 +46,8 @@ class Camera {
         std::vector<sf::Color> pixel_grid;
         double d_aspect_ratio      = 1.0;     // default aspect ratio is a square
         unsigned int    u_img_width         = 100;     // default image width is 100 pixels
-        int    samples_per_pixel = 10;      // count for random samples per pixel
-        int    max_depth         = 10;      // max depth for recursion
+        unsigned int    u_samples_per_pixel = 10;      // count for random samples per pixel
+        unsigned int u_max_light_bounce = 10;      // max depth for recursion
         double vfov              = 90;      // vertical viewing angle
         Point3 lookfrom          = Point3(0, 0, 0);
         Point3 lookat            = Point3(0, 0, -1);

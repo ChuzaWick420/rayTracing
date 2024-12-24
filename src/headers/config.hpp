@@ -18,13 +18,13 @@
 
 struct Configuration {
     float        f_aspect_ratio        = 16.0f / 9.0f;
-    unsigned int u_img_width           = 1024;
+    unsigned int u_img_width           = 800;
     unsigned int u_win_width           = 1024;
     bool         b_img_gen_permission  = true;
     unsigned int u_max_light_bounce    = 50;
     unsigned int u_max_threads         = 2;
     int          i_vfov                = 25;
-    unsigned int u_samples_per_pixel   = 500;
+    unsigned int u_samples_per_pixel   = 1;
     float        f_cam_defocus_angle   = 0.6;
     float        f_local_length        = 10.0;
     std::string  str_title             = "Ray Tracing";

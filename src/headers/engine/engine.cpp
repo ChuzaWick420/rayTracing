@@ -19,7 +19,7 @@ Engine::Engine(Configuration C_config) :
     Cam_camera.set_aspect_ratio(C_config.f_aspect_ratio);
     Cam_camera.set_img_width(C_config.u_img_width);
     Cam_camera.set_samples_per_pixel(C_config.u_samples_per_pixel);
-    Cam_camera.set_max_depth(C_config.u_max_light_bounce);
+    Cam_camera.set_max_light_bounce(C_config.u_max_light_bounce);
     Cam_camera.set_threads(C_config.u_max_threads);
     Cam_camera.set_vfov(C_config.i_vfov);
     Cam_camera.set_lookfrom(C_config.P3_cam_origin);

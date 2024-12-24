@@ -28,9 +28,9 @@ sf::Image* Camera::render(const Hittable& world) {
                 int x = i % u_img_width;
                 int y = (i + offset) / u_img_width;
 
-                for (int sample = 0; sample < samples_per_pixel; sample++) {
+                for (int sample = 0; sample < u_samples_per_pixel; sample++) {
                     Ray r = get_ray(x, y);
-                    pixel_color += ray_color(r, max_depth, world);
+                    pixel_color += ray_color(r, u_max_light_bounce, world);
                 }
 
                 write_color(&pixel_grid[y * u_img_width + x], pixel_color * pixel_samples_scale);
@@ -58,7 +58,7 @@ void Camera::initialize() {
     img_height = std::ceil(float(u_img_width) / d_aspect_ratio);
     img_height = (img_height < 1) ? 1 : img_height;
 
-    pixel_samples_scale = 1.0 / samples_per_pixel;
+    pixel_samples_scale = 1.0 / u_samples_per_pixel;
 
     center = lookfrom;
 
@@ -152,11 +152,11 @@ int Camera::get_img_width() const {
 }
 
 int Camera::get_samples_per_pixel() const {
-    return samples_per_pixel;
+    return u_samples_per_pixel;
 }
 
-int Camera::get_max_depth() const {
-    return max_depth;
+int Camera::get_max_light_bounce() const {
+    return u_max_light_bounce;
 }
 
 double Camera::get_vfov() const {
@@ -197,11 +197,11 @@ void Camera::set_img_width(int img_width) {
 }
 
 void Camera::set_samples_per_pixel(int samples_per_pixel) {
-    this->samples_per_pixel = samples_per_pixel;
+    this->u_samples_per_pixel = samples_per_pixel;
 }
 
-void Camera::set_max_depth(int max_depth) {
-    this->max_depth = max_depth;
+void Camera::set_max_light_bounce(int light_bounce_limit) {
+    this->u_max_light_bounce = light_bounce_limit;
 }
 
 void Camera::set_vfov(double vfov) {
