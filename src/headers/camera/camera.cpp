@@ -72,7 +72,7 @@ void Camera::initialize() {
 
     // Calculate the u,v,w unit basis vectors for the camera coordinate frame.
     w = unit_vector(P3_origin - P3_capture_target_pos);
-    u = unit_vector(cross(vup, w));
+    u = unit_vector(cross(V3_y_unit, w));
     v = cross(w, u);
 
     // Calculate the vectors across the horizontal and down the vertical viewport edges.
@@ -171,8 +171,8 @@ Point3 Camera::get_capture_target_pos() const {
     return P3_capture_target_pos;
 }
 
-Vec3 Camera::get_vup() const {
-    return vup;
+Vec3 Camera::get_y_unit() const {
+    return V3_y_unit;
 }
 
 int Camera::get_threads() const {
@@ -216,8 +216,8 @@ void Camera::set_capture_target_pos(Point3 lookat) {
     this->P3_capture_target_pos = lookat;
 }
 
-void Camera::set_vup(Vec3 vup) {
-    this->vup = vup;
+void Camera::set_y_unit(Vec3 vup) {
+    this->V3_y_unit = vup;
 }
 
 void Camera::set_threads(int threads) {
