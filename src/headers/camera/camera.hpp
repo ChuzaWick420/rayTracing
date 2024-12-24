@@ -56,8 +56,7 @@ class Camera {
         double d_defocus_angle = 0;
         double d_focal_length = 10;
         std::vector<std::thread> threads;
-        int window_width = 1024;
-        int img_height;               // Rendered image height
+        unsigned int u_img_height;               // Rendered image height
         Point3 center;                   // Camera center
         Point3 pixel00_loc;              // Location of pixel 0, 0
         Vec3 pixel_delta_u;            // Offset to pixel to the right

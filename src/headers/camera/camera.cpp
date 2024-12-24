@@ -8,7 +8,7 @@
 sf::Image* Camera::render(const Hittable& world) {
     initialize();
 
-    int total_pixels = img_height * u_img_width;
+    int total_pixels = u_img_height * u_img_width;
 
     pixel_grid.resize(total_pixels);
 
@@ -55,20 +55,20 @@ sf::Image* Camera::render(const Hittable& world) {
 }
 
 void Camera::initialize() {
-    img_height = std::ceil(float(u_img_width) / d_aspect_ratio);
-    img_height = (img_height < 1) ? 1 : img_height;
+    u_img_height = std::ceil(float(u_img_width) / d_aspect_ratio);
+    u_img_height = (u_img_height < 1) ? 1 : u_img_height;
 
     pixel_samples_scale = 1.0 / u_samples_per_pixel;
 
     center = P3_origin;
 
-    i_image.create(u_img_width, img_height);
+    i_image.create(u_img_width, u_img_height);
 
     // Determine viewport dimensions.
     auto theta = degrees_to_radians(vfov);
     auto h = std::tan(theta / 2);
     auto viewport_height = 2 * h * d_focal_length;
-    auto viewport_width = viewport_height * (double(u_img_width)/img_height);
+    auto viewport_width = viewport_height * (double(u_img_width)/u_img_height);
 
     // Calculate the u,v,w unit basis vectors for the camera coordinate frame.
     w = unit_vector(P3_origin - P3_capture_target_pos);
@@ -81,7 +81,7 @@ void Camera::initialize() {
 
     // Calculate the horizontal and vertical delta vectors from pixel to pixel.
     pixel_delta_u = viewport_u / u_img_width;
-    pixel_delta_v = viewport_v / img_height;
+    pixel_delta_v = viewport_v / u_img_height;
 
     // Calculate the location of the upper left pixel.
     auto viewport_upper_left = center - (d_focal_length * w) - viewport_u/2 - viewport_v/2;
