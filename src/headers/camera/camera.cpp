@@ -8,7 +8,7 @@
 sf::Image* Camera::render(const Hittable& world) {
     initialize();
 
-    int total_pixels = img_height * img_width;
+    int total_pixels = img_height * u_img_width;
 
     pixel_grid.resize(total_pixels);
 
@@ -25,17 +25,17 @@ sf::Image* Camera::render(const Hittable& world) {
 
                 Color pixel_color(0, 0, 0);
 
-                int x = i % img_width;
-                int y = (i + offset) / img_width;
+                int x = i % u_img_width;
+                int y = (i + offset) / u_img_width;
 
                 for (int sample = 0; sample < samples_per_pixel; sample++) {
                     Ray r = get_ray(x, y);
                     pixel_color += ray_color(r, max_depth, world);
                 }
 
-                write_color(&pixel_grid[y * img_width + x], pixel_color * pixel_samples_scale);
+                write_color(&pixel_grid[y * u_img_width + x], pixel_color * pixel_samples_scale);
 
-                this->i_image.setPixel(x, y, pixel_grid[y * img_width + x]);
+                this->i_image.setPixel(x, y, pixel_grid[y * u_img_width + x]);
 
             }
 
@@ -55,20 +55,20 @@ sf::Image* Camera::render(const Hittable& world) {
 }
 
 void Camera::initialize() {
-    img_height = std::ceil(float(img_width) / aspect_ratio);
+    img_height = std::ceil(float(u_img_width) / d_aspect_ratio);
     img_height = (img_height < 1) ? 1 : img_height;
 
     pixel_samples_scale = 1.0 / samples_per_pixel;
 
     center = lookfrom;
 
-    i_image.create(img_width, img_height);
+    i_image.create(u_img_width, img_height);
 
     // Determine viewport dimensions.
     auto theta = degrees_to_radians(vfov);
     auto h = std::tan(theta / 2);
     auto viewport_height = 2 * h * focus_dist;
-    auto viewport_width = viewport_height * (double(img_width)/img_height);
+    auto viewport_width = viewport_height * (double(u_img_width)/img_height);
 
     // Calculate the u,v,w unit basis vectors for the camera coordinate frame.
     w = unit_vector(lookfrom - lookat);
@@ -80,7 +80,7 @@ void Camera::initialize() {
     auto viewport_v = viewport_height * -v;
 
     // Calculate the horizontal and vertical delta vectors from pixel to pixel.
-    pixel_delta_u = viewport_u / img_width;
+    pixel_delta_u = viewport_u / u_img_width;
     pixel_delta_v = viewport_v / img_height;
 
     // Calculate the location of the upper left pixel.
@@ -144,11 +144,11 @@ Color Camera::ray_color(const Ray& r, int depth, const Hittable& world) const {
 
 // getters
 double Camera::get_aspect_ratio() const {
-    return aspect_ratio;
+    return d_aspect_ratio;
 }
 
 int Camera::get_img_width() const {
-    return img_width;
+    return u_img_width;
 }
 
 int Camera::get_samples_per_pixel() const {
@@ -189,11 +189,11 @@ double Camera::get_focus_dist() const {
 
 // setters
 void Camera::set_aspect_ratio(double aspect_ratio) {
-    this->aspect_ratio = aspect_ratio;
+    this->d_aspect_ratio = aspect_ratio;
 }
 
 void Camera::set_img_width(int img_width) {
-    this->img_width = img_width;
+    this->u_img_width = img_width;
 }
 
 void Camera::set_samples_per_pixel(int samples_per_pixel) {

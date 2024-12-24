@@ -3,9 +3,9 @@
 
 int main () {
 
-    Configuration configs;
-    Engine engine(configs);
-    engine.run();
+    Configuration C_configs;
+    Engine E_engine(C_configs);
+    E_engine.run();
 
     return 0;
 }

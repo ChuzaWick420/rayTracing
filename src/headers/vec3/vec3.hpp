@@ -113,9 +113,9 @@ inline Vec3 unit_vector(const Vec3& v) {
 
 inline Vec3 random_in_unit_sphere() {
     while (true) {
-        auto p = Vec3::random(-1,1);
-        if (p.length_squared() < 1)
-            return p;
+        auto V3_p = Vec3::random(-1,1);
+        if (V3_p.length_squared() < 1)
+            return V3_p;
     }
 }
 
@@ -128,7 +128,7 @@ inline Vec3 random_on_hemisphere(const Vec3& normal) {
     if (dot(on_unit_sphere, normal) > 0.0) // In the same hemisphere as the normal
         return on_unit_sphere;
     else
-        return -on_unit_sphere;
+        return - on_unit_sphere;
 }
 
 inline Vec3 reflect(const Vec3& v, const Vec3& n) {
@@ -147,9 +147,9 @@ inline Vec3 refract(const Vec3& uv, const Vec3& n, double etai_over_etat) {
 
 inline Vec3 random_in_unit_disk() {
     while(true) {
-        auto p = Vec3(random_double(-1, 1), random_double(-1, 1), 0);
-        if (p.length_squared() < 1)
-            return p;
+        auto V3_p = Vec3(random_double(-1, 1), random_double(-1, 1), 0);
+        if (V3_p.length_squared() < 1)
+            return V3_p;
     }
 }
 

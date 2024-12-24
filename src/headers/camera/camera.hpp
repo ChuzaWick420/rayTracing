@@ -44,8 +44,8 @@ class Camera {
 
     private:
         std::vector<sf::Color> pixel_grid;
-        double aspect_ratio      = 1.0;     // default aspect ratio is a square
-        int    img_width         = 100;     // default image width is 100 pixels
+        double d_aspect_ratio      = 1.0;     // default aspect ratio is a square
+        unsigned int    u_img_width         = 100;     // default image width is 100 pixels
         int    samples_per_pixel = 10;      // count for random samples per pixel
         int    max_depth         = 10;      // max depth for recursion
         double vfov              = 90;      // vertical viewing angle
@@ -65,8 +65,8 @@ class Camera {
         double pixel_samples_scale;      // Color scale factor for a sum of pixel samples
         Vec3 u, v, w;
         sf::Image i_image;
-        Vec3 defocus_disk_u;
-        Vec3 defocus_disk_v;
+        Vec3 defocus_disk_u;        // Horizontal radius
+        Vec3 defocus_disk_v;        // Vertical radius
         void initialize();
         Point3 defocus_disk_sample() const;
         Vec3 sample_square();
