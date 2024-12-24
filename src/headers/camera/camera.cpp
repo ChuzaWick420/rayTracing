@@ -15,7 +15,7 @@ sf::Image* Camera::render(const Hittable& world) {
     int thread_load = total_pixels / u_threads_count;
 
     for (int j = 1; j <= u_threads_count; j++) {
-        worker_threads.push_back(std::thread([&, j] {
+        threads.push_back(std::thread([&, j] {
 
             int thread_id = j;
 
@@ -44,8 +44,8 @@ sf::Image* Camera::render(const Hittable& world) {
 
     //waiting for threads
     std::for_each(
-        worker_threads.begin(),
-        worker_threads.end(),
+        threads.begin(),
+        threads.end(),
         [](std::thread &t) {
             t.join();
         }

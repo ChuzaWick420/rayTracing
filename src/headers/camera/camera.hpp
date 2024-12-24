@@ -55,7 +55,7 @@ class Camera {
         unsigned int u_threads_count = 1;
         double d_defocus_angle = 0;
         double d_focal_length = 10;
-        std::vector<std::thread> worker_threads;
+        std::vector<std::thread> threads;
         int window_width = 1024;
         int img_height;               // Rendered image height
         Point3 center;                   // Camera center
