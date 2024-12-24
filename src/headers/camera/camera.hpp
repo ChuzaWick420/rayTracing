@@ -61,7 +61,7 @@ class Camera {
         Point3 P3_pixel00_loc;              // Location of pixel 0, 0
         Vec3 V3_pixel_delta_u;            // Offset to pixel to the right
         Vec3 V3_pixel_delta_v;            // Offset to pixel below
-        double pixel_samples_scale;      // Color scale factor for a sum of pixel samples
+        double d_pixel_samples_scale;      // Color scale factor for a sum of pixel samples
         Vec3 u, v, w;
         sf::Image i_image;
         Vec3 defocus_disk_u;        // Horizontal radius

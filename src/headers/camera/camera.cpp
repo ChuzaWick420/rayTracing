@@ -33,7 +33,7 @@ sf::Image* Camera::render(const Hittable& world) {
                     pixel_color += ray_color(r, u_max_light_bounce, world);
                 }
 
-                write_color(&pixel_grid[y * u_img_width + x], pixel_color * pixel_samples_scale);
+                write_color(&pixel_grid[y * u_img_width + x], pixel_color * d_pixel_samples_scale);
 
                 this->i_image.setPixel(x, y, pixel_grid[y * u_img_width + x]);
 
@@ -58,7 +58,7 @@ void Camera::initialize() {
     u_img_height = std::ceil(float(u_img_width) / d_aspect_ratio);
     u_img_height = (u_img_height < 1) ? 1 : u_img_height;
 
-    pixel_samples_scale = 1.0 / u_samples_per_pixel;
+    d_pixel_samples_scale = 1.0 / u_samples_per_pixel;
 
     P3_center = P3_origin;
 
