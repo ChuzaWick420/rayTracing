@@ -25,7 +25,7 @@ class Camera {
         Vec3 get_y_unit() const;
         int get_threads_count() const;
         double get_defocus_angle() const;
-        double get_focus_dist() const;
+        double get_focal_length() const;
 
         // setters
         void set_aspect_ratio(double);
@@ -38,7 +38,7 @@ class Camera {
         void set_y_unit(Vec3);
         void set_threads_count(int);
         void set_defocus_angle(double);
-        void set_focus_dist(double);
+        void set_focal_length(double);
 
         ~Camera();
 
@@ -53,8 +53,8 @@ class Camera {
         Point3 P3_capture_target_pos = Point3(0, 0, -1);
         Vec3   V3_y_unit               = Vec3(0, 1, 0);
         unsigned int u_threads_count = 1;
-        double defocus_angle = 0;
-        double focus_dist = 10;
+        double d_defocus_angle = 0;
+        double d_focal_length = 10;
         std::vector<std::thread> worker_threads;
         int window_width = 1024;
         int img_height;               // Rendered image height

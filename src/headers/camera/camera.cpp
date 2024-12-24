@@ -67,7 +67,7 @@ void Camera::initialize() {
     // Determine viewport dimensions.
     auto theta = degrees_to_radians(vfov);
     auto h = std::tan(theta / 2);
-    auto viewport_height = 2 * h * focus_dist;
+    auto viewport_height = 2 * h * d_focal_length;
     auto viewport_width = viewport_height * (double(u_img_width)/img_height);
 
     // Calculate the u,v,w unit basis vectors for the camera coordinate frame.
@@ -84,11 +84,11 @@ void Camera::initialize() {
     pixel_delta_v = viewport_v / img_height;
 
     // Calculate the location of the upper left pixel.
-    auto viewport_upper_left = center - (focus_dist * w) - viewport_u/2 - viewport_v/2;
+    auto viewport_upper_left = center - (d_focal_length * w) - viewport_u/2 - viewport_v/2;
     pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
 
     // Calculate the camera defocus disk basis vectors
-    auto defocus_radius = focus_dist * std::tan(degrees_to_radians(defocus_angle / 2));
+    auto defocus_radius = d_focal_length * std::tan(degrees_to_radians(d_defocus_angle / 2));
     defocus_disk_u = u * defocus_radius;
     defocus_disk_v = v * defocus_radius;
 }
@@ -109,7 +109,7 @@ Ray Camera::get_ray(int u, int v) const {
                         + ((u + offset.x()) * pixel_delta_u)
                         + ((v + offset.y()) * pixel_delta_v);
 
-    auto ray_origin = (defocus_angle <= 0) ? center : defocus_disk_sample();
+    auto ray_origin = (d_defocus_angle <= 0) ? center : defocus_disk_sample();
     auto ray_direction = pixel_sample - ray_origin;
 
     return Ray(ray_origin, ray_direction);
@@ -180,11 +180,11 @@ int Camera::get_threads_count() const {
 }
 
 double Camera::get_defocus_angle() const {
-    return defocus_angle;
+    return d_defocus_angle;
 }
 
-double Camera::get_focus_dist() const {
-    return focus_dist;
+double Camera::get_focal_length() const {
+    return d_focal_length;
 }
 
 // setters
@@ -225,11 +225,11 @@ void Camera::set_threads_count(int threads) {
 }
 
 void Camera::set_defocus_angle(double defocus_angle) {
-    this->defocus_angle = defocus_angle;
+    this->d_defocus_angle = defocus_angle;
 }
 
-void Camera::set_focus_dist(double focus_dist) {
-    this->focus_dist = focus_dist;
+void Camera::set_focal_length(double focus_dist) {
+    this->d_focal_length = focus_dist;
 }
 
 Camera::~Camera() {}
