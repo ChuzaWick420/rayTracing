@@ -60,7 +60,7 @@ void Camera::initialize() {
 
     pixel_samples_scale = 1.0 / u_samples_per_pixel;
 
-    center = lookfrom;
+    center = P3_origin;
 
     i_image.create(u_img_width, img_height);
 
@@ -71,7 +71,7 @@ void Camera::initialize() {
     auto viewport_width = viewport_height * (double(u_img_width)/img_height);
 
     // Calculate the u,v,w unit basis vectors for the camera coordinate frame.
-    w = unit_vector(lookfrom - lookat);
+    w = unit_vector(P3_origin - P3_capture_target_pos);
     u = unit_vector(cross(vup, w));
     v = cross(w, u);
 
@@ -163,12 +163,12 @@ double Camera::get_vfov() const {
     return vfov;
 }
 
-Point3 Camera::get_lookfrom() const {
-    return lookfrom;
+Point3 Camera::get_origin() const {
+    return P3_origin;
 }
 
-Point3 Camera::get_lookat() const {
-    return lookat;
+Point3 Camera::get_capture_target_pos() const {
+    return P3_capture_target_pos;
 }
 
 Vec3 Camera::get_vup() const {
@@ -208,12 +208,12 @@ void Camera::set_vfov(double vfov) {
     this->vfov = vfov;
 }
 
-void Camera::set_lookfrom(Point3 lookfrom) {
-    this->lookfrom = lookfrom;
+void Camera::set_origin(Point3 lookfrom) {
+    this->P3_origin = lookfrom;
 }
 
-void Camera::set_lookat(Point3 lookat) {
-    this->lookat = lookat;
+void Camera::set_capture_target_pos(Point3 lookat) {
+    this->P3_capture_target_pos = lookat;
 }
 
 void Camera::set_vup(Vec3 vup) {

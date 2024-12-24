@@ -20,8 +20,8 @@ class Camera {
         int get_samples_per_pixel() const;
         int get_max_light_bounce() const;
         double get_vfov() const;
-        Point3 get_lookfrom() const;
-        Point3 get_lookat() const;
+        Point3 get_origin() const;
+        Point3 get_capture_target_pos() const;
         Vec3 get_vup() const;
         int get_threads() const;
         double get_defocus_angle() const;
@@ -33,8 +33,8 @@ class Camera {
         void set_samples_per_pixel(int);
         void set_max_light_bounce(int);
         void set_vfov(double);
-        void set_lookfrom(Point3);
-        void set_lookat(Point3);
+        void set_origin(Point3);
+        void set_capture_target_pos(Point3);
         void set_vup(Vec3);
         void set_threads(int);
         void set_defocus_angle(double);
@@ -49,8 +49,8 @@ class Camera {
         unsigned int    u_samples_per_pixel = 10;      // count for random samples per pixel
         unsigned int u_max_light_bounce = 10;      // max depth for recursion
         double vfov              = 90;      // vertical viewing angle
-        Point3 lookfrom          = Point3(0, 0, 0);
-        Point3 lookat            = Point3(0, 0, -1);
+        Point3 P3_origin = Point3(0, 0, 0);
+        Point3 P3_capture_target_pos = Point3(0, 0, -1);
         Vec3   vup               = Vec3(0, 1, 0);
         int threads = 1;
         double defocus_angle = 0;

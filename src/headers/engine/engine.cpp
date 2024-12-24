@@ -22,8 +22,8 @@ Engine::Engine(Configuration C_config) :
     Cam_camera.set_max_light_bounce(C_config.u_max_light_bounce);
     Cam_camera.set_threads(C_config.u_max_threads);
     Cam_camera.set_vfov(C_config.i_vfov);
-    Cam_camera.set_lookfrom(C_config.P3_cam_origin);
-    Cam_camera.set_lookat(C_config.P3_target_capture_pos);
+    Cam_camera.set_origin(C_config.P3_cam_origin);
+    Cam_camera.set_capture_target_pos(C_config.P3_target_capture_pos);
     Cam_camera.set_vup(C_config.V3_cam_y_unit);
     Cam_camera.set_defocus_angle(C_config.f_cam_defocus_angle);
     Cam_camera.set_focus_dist(C_config.f_local_length);
