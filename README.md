@@ -1,5 +1,7 @@
 # Ray Tracing
-This project uses the [SFML CMAKE Template](https://github.com/SFML/cmake-sfml-project) for [SFML](https://www.sfml-dev.org/) integration.
+This project uses the following  
+- [SFML CMAKE Template](https://github.com/SFML/cmake-sfml-project) for [SFML](https://www.sfml-dev.org/) integration.
+- [nlohmann/json](https://github.com/nlohmann/json) for `JSON` parsing in `cpp`.
 
 ## Pre-requisites
 - [Cmake 3.27](https://cmake.org/) or above
