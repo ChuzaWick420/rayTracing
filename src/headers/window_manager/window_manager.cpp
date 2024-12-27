@@ -2,12 +2,18 @@
 
 #include <iostream>
 
-Window_manager::Window_manager(std::string title, sf::Vector2u dimensions, sf::Color background) :
-    u_width(dimensions.x),
-    u_height(dimensions.y),
-    R_window(sf::VideoMode({u_width, u_height}), title, sf::Style::Default),
-    clr_bg_color(background)
-{}
+Window_manager::Window_manager() {}
+
+Window_manager::Window_manager(std::string title, sf::Vector2u dimensions, sf::Color background) {
+    setup(title, dimensions, background);
+}
+
+void Window_manager::setup(std::string title, sf::Vector2u dimensions, sf::Color background) {
+    u_width = dimensions.x;
+    u_height = dimensions.y;
+    clr_bg_color = background;
+    R_window.create(sf::VideoMode({u_width,u_height}), title, sf::Style::Default);
+}
 
 void Window_manager::display(const sf::Image* const img) {
 

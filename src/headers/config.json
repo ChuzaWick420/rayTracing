@@ -1,0 +1,116 @@
+{
+    "f_aspect_ratio": {
+        "width": 16,
+        "height": 9
+    },
+    "u_img_width": 1024,
+    "u_win_width": 1024,
+    "u_samples_per_pixel": 500,
+    "b_img_gen_permission": true,
+    "u_max_light_bounce": 50,
+    "u_max_threads": 2,
+    "i_vfov": 25,
+    "f_cam_defocus_angle": 0.6,
+    "f_focal_length": 10.0,
+    "str_title": "Ray Tracing",
+    "clr_win_bg": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+    },
+    "clr_sky": {
+        "r": 0.5,
+        "g": 0.7,
+        "b": 1
+    },
+    "P3_cam_origin": {
+        "x": 0,
+        "y": 3,
+        "z": 10
+    },
+    "P3_target_capture_pos": {
+        "x": 0,
+        "y": 1,
+        "z": 0
+    },
+    "V3_cam_y_unit": {
+        "x": 0,
+        "y": 1,
+        "z": 0
+    },
+    "objects": [
+        {
+            "pos": {
+                "x": -1.7,
+                "y": 1.8,
+                "z": -2
+            },
+            "radius": 1.0,
+            "material": {
+                "type": "metal",
+                "color": {
+                    "r": 0.7,
+                    "g": 0.6,
+                    "b": 0.5
+                },
+                "fuzz": 0.05
+            }
+        },
+        {
+            "pos": {
+                "x": 0,
+                "y": 1,
+                "z": 0 
+            },
+            "radius": 1.0,
+            "material": {
+                "type": "dielectric",
+                "refractive_index": 1.5
+            }
+        },
+        {
+            "pos": {
+                "x": 0,
+                "y": 1,
+                "z": 0 
+            },
+            "radius": 0.9,
+            "material": {
+                "type": "dielectric",
+                "refractive_index": 0.666667
+            }
+        },
+        {
+            "pos": {
+                "x": 1.5,
+                "y": 1.2,
+                "z": -2 
+            },
+            "radius": 1.0,
+            "material": {
+                "type": "lambertian",
+                "color": {
+                    "r": 0.4,
+                    "g": 0.2,
+                    "b": 0.1
+                }
+            }
+        },
+        {
+            "pos": {
+                "x": 0,
+                "y": -1000,
+                "z": 0 
+            },
+            "radius": 1000,
+            "material": {
+                "type": "lambertian",
+                "color": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                }
+            }
+        }
+    ]
+}

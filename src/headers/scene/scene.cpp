@@ -7,6 +7,8 @@
 #include <memory>
 #include <vector>
 
+Scene::Scene() {}
+
 Scene::Scene(std::vector<std::shared_ptr<Hittable>> objects) : 
     vec_Obj_objects(objects)
 {}
@@ -18,4 +20,8 @@ Hittable_list& Scene::create_scene() {
     }
 
     return HL_world;
+}
+
+void Scene::setup(std::vector<std::shared_ptr<Hittable>> objects) {
+    vec_Obj_objects = objects;
 }

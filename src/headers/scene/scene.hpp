@@ -9,8 +9,11 @@
 
 class Scene {
     public:
+        Scene();
         Scene(std::vector<std::shared_ptr<Hittable>>);
         Hittable_list& create_scene();
+        void setup(std::vector<std::shared_ptr<Hittable>>);
+
     private:
         Hittable_list HL_world;
         std::vector<std::shared_ptr<Hittable>> vec_Obj_objects;

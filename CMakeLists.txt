@@ -13,8 +13,11 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
+FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz)
+FetchContent_MakeAvailable(json)
+
 add_executable(main src/main.cpp src/headers/camera/camera.cpp src/headers/interval/interval.cpp src/headers/hit_record/hit_record.cpp src/headers/hittable_list/hittable_list.cpp src/headers/ray/ray.cpp src/headers/color/color.cpp src/headers/vec3/vec3.cpp src/headers/engine/engine.cpp src/headers/scene/scene.cpp src/headers/window_manager/window_manager.cpp)
-target_link_libraries(main PRIVATE sfml-graphics)
+target_link_libraries(main PRIVATE sfml-graphics nlohmann_json::nlohmann_json)
 target_compile_features(main PRIVATE cxx_std_17)
 
 if(WIN32)
