@@ -33,4 +33,4 @@ build/bin/Release/main.exe
 ![final](./img_2.jpg)
 
 ## Documentation
-The documentation is available on my [notes_publisher](https://chuzawick420.github.io/notes_publisher/Projects/rayTracing/Main/).
+The documentation is available on my [notes_publisher](https://chuzawick420.github.io/notes_publisher/Projects/rayTracing/proj_raytracing_main/)
