@@ -59,7 +59,7 @@ std::shared_ptr<Material> material_properties (Json material) {
         );
 
     else {
-        std::cout << "Invalid type detected, please check config.json" << std::endl;
+        std::cout << "Invalid type detected, please check scene.json" << std::endl;
         return nullptr;
     }
 };
@@ -172,7 +172,7 @@ void Engine::run() {
     std::cout << "Image Generated Successfully" << std::endl;
 
     if (save_img)
-        I_ref_image->saveToFile("./rendered_img.png");
+        I_ref_image->saveToFile("./imgs/rendered_img.png");
 
     std::cout << "Image Saved Successfully" << std::endl;
 
